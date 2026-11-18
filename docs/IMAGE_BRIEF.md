@@ -4,20 +4,20 @@ The site is built with 23 image slots. Each slot already shows original lattice 
 
 ## Status (2026-11-19)
 
-22 of 23 slots hold the owner's supplied images (sources `images/4.png` to `11.png` from the chat), cropped with `scratchpad/crop-supplied.mjs` and imported with `npm run media:import`:
+20 slots hold the owner's supplied images (sources `images/4.png` to `11.png` from the chat), cropped with `scratchpad/crop-supplied.mjs` and imported with `npm run media:import`:
 
 | Source | Slots |
 |---|---|
-| Glass architecture, dark left (4) | hero-system-desktop, hero-system-mobile, system-core-01, architecture-digital, industry-world |
+| Glass architecture, dark left (4) | hero-system-desktop, hero-system-mobile, architecture-digital |
 | Glass cloud over servers at sunrise (6) | capability-cloud, insight-03, final-cta-horizon |
-| Data wave between glass panels (7) | capability-data, insight-01, transition-everything-connects |
-| Chip with capability panels (9) | capability-ai |
+| Data wave between glass panels (7) | capability-data, insight-01 |
+| Chip with capability panels (9) | system-core-01 |
 | Laptop with floating layers (11) | capability-software |
 | Three colleagues at a glass model (5) | build-process, people-engineer-01, people-leader-01 |
 | Five colleagues at a glass model (10) | talent-network, people-consultant-01, people-architect-01, people-recruiter-01 |
 | Woman studying visualizations (8) | people-product-01, insight-02 |
 
-`capability-security` still uses the drawn scene. Replacing any slot: save a new file with the slot's name in `images-inbox` and re-run the import.
+Removed on owner feedback (2026-11-19): the strip under the hero and the band behind Industries (they read as stray images), the AI capability image and the repeat of the hero structure in the System core. `capability-ai` and `capability-security` use their drawn scenes. Replacing any slot: save a new file with the slot's name in `images-inbox` and re-run the import.
 
 ## How to deliver
 

@@ -35,11 +35,6 @@ export default function Home() {
         imageMobile={<Visual name="heroMobile" rounded={false} className="!absolute inset-0 !aspect-auto size-full" sizes="100vw" />}
       />
 
-      {/* Transition: everything connects. A cinematic strip between the dark hero and the light system. */}
-      <div aria-hidden="true" className="bg-ink-950">
-        <Visual name="connects" rounded={false} sizes="100vw" className="max-sm:!aspect-[21/7]" />
-      </div>
-
       <Chapter id="system" index="02" name="Untangle" aria-labelledby="system-title">
         <SystemMap core={<Visual name="core" rounded={false} sizes="(min-width: 1024px) 22rem, 46vw" />} />
       </Chapter>
@@ -89,7 +84,7 @@ export default function Home() {
       <WorkChapter index="07" />
 
       <Chapter index="08" name="Industries" tone="dark" aria-labelledby="industries-title" className="overflow-clip">
-        <IndustryWorld index="08" band={<Visual name="industries" rounded={false} sizes="170vw" />} />
+        <IndustryWorld index="08" />
       </Chapter>
 
       <InsightsChapter index="09" />

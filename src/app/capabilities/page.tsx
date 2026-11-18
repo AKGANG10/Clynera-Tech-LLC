@@ -107,7 +107,7 @@ export default function CapabilitiesPage() {
       </Chapter>
 
       <Chapter index="08" name="Industries" tone="dark" aria-labelledby="cap-industries-title" className="overflow-clip">
-        <IndustryWorld headingId="cap-industries-title" band={<Visual name="industries" rounded={false} sizes="170vw" />} />
+        <IndustryWorld headingId="cap-industries-title" />
       </Chapter>
     </>
   );

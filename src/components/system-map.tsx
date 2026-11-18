@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
-import { diagonalPath } from "@/lib/lattice";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useScrollProgress } from "@/lib/motion";
 import { ChapterLabel, cx } from "./ui";
 
@@ -14,15 +13,39 @@ import { ChapterLabel, cx } from "./ui";
 const PARTS = ["Teams", "Data", "AI", "Code", "Cloud", "Process", "Security", "Talent", "Customers"] as const;
 
 // Connected positions: a diamond around the core (x%, y%), desktop and phone.
-const ring = (a: number, b: number) =>
+const ring = (a: number, b: number, offset = 0) =>
   PARTS.map((_, i) => {
-    const t = (i / PARTS.length) * Math.PI * 2 - Math.PI / 2;
+    const t = ((i + offset) / PARTS.length) * Math.PI * 2 - Math.PI / 2;
     const c = Math.cos(t);
     const s = Math.sin(t);
     const k = 1 / (Math.abs(c) / a + Math.abs(s) / b);
     return [50 + c * k, 50 + s * k] as [number, number];
   });
-const CONNECTED = { wide: ring(34, 38), narrow: ring(38, 30) };
+// Phones: hand-placed, so nine labels never collide on a narrow stage (order matches PARTS).
+const NARROW: [number, number][] = [
+  [50, 7],
+  [80, 24],
+  [82, 46],
+  [80, 68],
+  [64, 91],
+  [36, 91],
+  [20, 68],
+  [18, 46],
+  [20, 24],
+];
+const CONNECTED = { wide: ring(34, 38), narrow: NARROW };
+// Phones scatter to their own spread-out targets (offsets from NARROW).
+const SCATTER_NARROW: [number, number][] = [
+  [18, 23],
+  [-52, 28],
+  [-8, 36],
+  [-50, -56],
+  [14, -33],
+  [-14, -15],
+  [38, -56],
+  [22, 48],
+  [40, 20],
+];
 // Where each part drifts when isolated (offsets in % of the stage).
 const SCATTER: [number, number][] = [
   [-30, -6],
@@ -51,6 +74,8 @@ export function SystemMap({ core }: { core: ReactNode }) {
   const coreRef = useRef<HTMLDivElement>(null);
   const reduced = useRef(false);
   const last = useRef(0);
+  // Statements share one slot while animating; without script or with reduced motion they stack.
+  const [stacked, setStacked] = useState(false);
 
   const apply = (p: number) => {
     last.current = p;
@@ -68,13 +93,15 @@ export function SystemMap({ core }: { core: ReactNode }) {
       const [x, y] = pos[i];
       el.style.left = `${x}%`;
       el.style.top = `${y}%`;
-      const clusterX = ((i % 3) - 1) * (narrow ? 22 : 12) + 50 - x;
+      const clusterX = ((i % 3) - 1) * (narrow ? 30 : 12) + 50 - x;
       const clusterY = (Math.floor(i / 3) - 1) * (narrow ? 7 : 8) + 50 - y;
-      const [sx, sy] = SCATTER[i];
-      // Keep every word on stage while it drifts.
-      const ox = Math.min(92 - x, Math.max(8 - x, (clusterX * (1 - apart) + sx * apart) * (1 - back)));
-      const oy = Math.min(92 - y, Math.max(8 - y, (clusterY * (1 - apart) + sy * apart) * (1 - back)));
-      el.style.transform = `translate3d(calc(-50% + ${((ox / 100) * w).toFixed(1)}px), calc(-50% + ${((oy / 100) * h).toFixed(1)}px), 0)`;
+      const [sx, sy] = (narrow ? SCATTER_NARROW : SCATTER)[i];
+      // Keep every whole label on stage while it drifts (clamped by its own size).
+      const hw = el.offsetWidth / 2 + 6;
+      const hh = el.offsetHeight / 2 + 6;
+      const px = Math.min(w - hw, Math.max(hw, ((x + (clusterX * (1 - apart) + sx * apart) * (1 - back)) / 100) * w));
+      const py = Math.min(h - hh, Math.max(hh, ((y + (clusterY * (1 - apart) + sy * apart) * (1 - back)) / 100) * h));
+      el.style.transform = `translate3d(calc(-50% + ${(px - (x / 100) * w).toFixed(1)}px), calc(-50% + ${(py - (y / 100) * h).toFixed(1)}px), 0)`;
     });
     const draw = reduced.current ? 1 : smooth(0.56, 0.86, p);
     lines.current?.querySelectorAll("path").forEach((path, i) => {
@@ -85,36 +112,38 @@ export function SystemMap({ core }: { core: ReactNode }) {
       coreRef.current.style.opacity = String(c);
       coreRef.current.style.transform = `translate(-50%, -50%) scale(${(0.6 + 0.4 * c).toFixed(3)})`;
     }
-    if (first.current) first.current.style.opacity = reduced.current ? "1" : String(1 - smooth(0.7, 0.84, p) * 0.85);
-    if (second.current) second.current.style.opacity = reduced.current ? "1" : String(smooth(0.78, 0.92, p));
+    if (first.current && !reduced.current) {
+      const out = smooth(0.66, 0.78, p);
+      first.current.style.opacity = String(1 - out);
+      first.current.style.transform = `translate3d(0, ${(-16 * out).toFixed(1)}px, 0)`;
+    }
+    if (second.current && !reduced.current) {
+      const inn = smooth(0.76, 0.88, p);
+      second.current.style.opacity = String(inn);
+      second.current.style.transform = `translate3d(0, ${(16 * (1 - inn)).toFixed(1)}px, 0)`;
+    }
   };
 
   useScrollProgress(track, apply);
 
-  // Connector geometry depends on the stage size: 45 degree paths, word to core and word to word.
+  // Connectors depend on the stage size: one clean spoke from each part to the core.
   useEffect(() => {
     const st = stage.current;
     const svg = lines.current;
     if (!st || !svg) return;
     reduced.current = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduced.current) requestAnimationFrame(() => setStacked(true));
     const layout = () => {
       const w = st.clientWidth;
       const h = st.clientHeight;
       const pos = (w < 700 ? CONNECTED.narrow : CONNECTED.wide).map(([x, y]) => [(x / 100) * w, (y / 100) * h]);
       const cx = w / 2;
       const cy = h / 2;
-      const d = [
-        ...pos.map(([x, y]) => diagonalPath(x, y, cx, cy)),
-        ...pos.map(([x, y], i) => {
-          const [nx, ny] = pos[(i + 1) % pos.length];
-          return diagonalPath(x, y, nx, ny);
-        }),
-      ];
       svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
-      svg.innerHTML = d
+      svg.innerHTML = pos
         .map(
-          (p, i) =>
-            `<path d="${p}" pathLength="1" fill="none" stroke="${i < pos.length ? "#14c9b5" : "#26346a"}" stroke-opacity="${i < pos.length ? 0.9 : 0.35}" stroke-width="${i < pos.length ? 1.6 : 1}" stroke-dasharray="1" stroke-dashoffset="1" stroke-linecap="round" />`,
+          ([x, y]) =>
+            `<path d="M${x.toFixed(1)} ${y.toFixed(1)}L${cx.toFixed(1)} ${cy.toFixed(1)}" pathLength="1" fill="none" stroke="#14c9b5" stroke-opacity="0.75" stroke-width="1.5" stroke-dasharray="1" stroke-dashoffset="1" stroke-linecap="round" />`,
         )
         .join("");
       apply(last.current);
@@ -128,18 +157,23 @@ export function SystemMap({ core }: { core: ReactNode }) {
   return (
     <div ref={track} className="system-track relative h-[300vh] motion-reduce:h-auto">
       <div className="sticky top-0 flex h-svh min-h-[40rem] flex-col overflow-hidden motion-reduce:relative motion-reduce:h-auto">
-        <div className="container-x relative z-10 pt-[calc(var(--header-h)+2rem)]">
+        <div className="container-x relative z-10 pt-[calc(var(--header-h)+1.5rem)]">
           <ChapterLabel index="02" name="Untangle" />
-          <h2 ref={first} id="system-title" className="t-h2 mt-6 max-w-[14ch] text-ink-950">
-            Most problems aren&apos;t technical. They&apos;re tangled.
-          </h2>
+          <div className="relative mt-5">
+            <h2 ref={first} id="system-title" className="t-h2 max-w-[24ch] text-[clamp(1.9rem,3.4vw,3.5rem)] text-ink-950">
+              Most problems aren&apos;t technical. <span className="text-ink-500">They&apos;re tangled.</span>
+            </h2>
+            <p ref={second} className={cx("t-h2 max-w-[24ch] text-[clamp(1.9rem,3.4vw,3.5rem)] text-ink-950", stacked ? "absolute inset-x-0 top-0 opacity-0" : "mt-4")}>
+              Untangle the parts and the <span className="text-signal-700">path appears.</span>
+            </p>
+          </div>
         </div>
 
-        <div ref={stage} className="relative min-h-[26rem] flex-1 motion-reduce:h-[70svh]">
-          <div ref={coreRef} aria-hidden="true" className="absolute top-1/2 left-1/2 w-[min(30vw,32svh,22rem)] max-md:w-[min(46vw,28svh)]" style={{ transform: "translate(-50%, -50%)" }}>
+        <div ref={stage} className="relative my-4 min-h-[24rem] flex-1 motion-reduce:h-[70svh]">
+          <svg ref={lines} aria-hidden="true" className="absolute inset-0 size-full" />
+          <div ref={coreRef} aria-hidden="true" className="absolute top-1/2 left-1/2 w-[min(26vw,30svh,20rem)] max-md:w-[min(34vw,24svh)]" style={{ transform: "translate(-50%, -50%)" }}>
             <div className="overflow-hidden [clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)]">{core}</div>
           </div>
-          <svg ref={lines} aria-hidden="true" className="absolute inset-0 size-full" />
           <ul aria-label="Parts of the system" className="absolute inset-0">
             {PARTS.map((part, i) => {
               const [x, y] = CONNECTED.wide[i];
@@ -163,11 +197,6 @@ export function SystemMap({ core }: { core: ReactNode }) {
           </ul>
         </div>
 
-        <div className="container-x relative z-10 flex justify-end pb-[max(2.5rem,6svh)]">
-          <p ref={second} className="t-h2 max-w-[15ch] text-right text-ink-950">
-            Untangle the parts and the <span className="text-signal-700">path appears.</span>
-          </p>
-        </div>
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ export const visuals = {
   heroDesktop: slot("hero-system-desktop.webp", "hero", [21, 9], "dark", "right", "Layered glass structures and light trails forming on the right of a dark field"),
   heroMobile: slot("hero-system-mobile.webp", "hero", [9, 16], "dark", "bottom", "Layered glass structures and light trails in a dark vertical frame"),
   connects: slot("transition-everything-connects.webp", "system", [21, 3], "dark", "band", "A wave of light points flowing between glass panels"),
-  core: slot("system-core-01.webp", "system", [1, 1], "dark", "center", "A glass structure with a warm light at its core"),
+  core: slot("system-core-01.webp", "system", [1, 1], "dark", "center", "A glass chip at the centre of connected panels for cloud, AI, code, data, security and people"),
   ai: slot("capability-ai.webp", "capabilities", [4, 3], "dark", "right", "A glass chip at the centre of connected panels for cloud, AI, code, data, security and people"),
   cloud: slot("capability-cloud.webp", "capabilities", [4, 3], "dark", "right", "Glass server towers beneath a translucent cloud at sunrise"),
   software: slot("capability-software.webp", "capabilities", [16, 9], "dark", "center", "Layered interface panels rising from a laptop"),
