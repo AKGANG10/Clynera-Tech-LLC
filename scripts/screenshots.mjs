@@ -1,0 +1,114 @@
+// Visual review helper: full-page screenshots of every route at desktop and phone widths.
+//
+// Usage: npm run build && node scripts/screenshots.mjs <output-dir> [route ...]
+// Uses the installed Microsoft Edge (set PW_CHANNEL=chromium to use Playwright's Chromium).
+//
+// Full-page captures use reduced motion: scroll-driven reveals would otherwise
+// leave below-the-fold content at its starting opacity. A separate viewport
+// capture of the home hero shows the animated canvas.
+
+import { chromium } from "@playwright/test";
+import { spawn, spawnSync } from "node:child_process";
+import { mkdir } from "node:fs/promises";
+import path from "node:path";
+
+// --tour: scroll through each route with motion on, capturing viewport frames
+// (pinned and scroll-driven sections only make sense this way).
+const tour = process.argv.includes("--tour");
+const args = process.argv.slice(2).filter((a) => a !== "--tour");
+const outDir = path.resolve(args[0] ?? "screenshots");
+const routes = args.slice(1).length
+  ? args.slice(1)
+  : ["/", "/capabilities", "/work", "/people", "/insights", "/insights/why-ai-projects-stall-before-production", "/company", "/contact", "/privacy", "/does-not-exist"];
+const port = 3200;
+const base = `http://localhost:${port}`;
+const channel = process.env.PW_CHANNEL ?? "msedge";
+
+// Refuse to run against something already on the port: it could be a stale build.
+try {
+  await fetch(base);
+  console.error(`Port ${port} is already in use. Stop that process first so screenshots reflect the current build.`);
+  process.exit(1);
+} catch {}
+
+// One fixed command string (no user input), so running it through the shell is safe on Windows.
+const server = spawn(`npx next start -p ${port}`, {
+  stdio: "ignore",
+  shell: true,
+  env: { ...process.env, E2E_TEST_MODE: "1", INQUIRY_DELIVERY: "log" },
+});
+
+async function waitForServer() {
+  for (let i = 0; i < 60; i++) {
+    try {
+      if ((await fetch(base)).ok) return;
+    } catch {}
+    await new Promise((r) => setTimeout(r, 500));
+  }
+  throw new Error("server did not start");
+}
+
+const slug = (r) => (r === "/" ? "home" : r.replace(/^\//, "").replace(/\//g, "_"));
+
+try {
+  await waitForServer();
+  await mkdir(outDir, { recursive: true });
+  const browser = await chromium.launch(channel === "chromium" ? {} : { channel });
+  const sizes = [
+    { name: "desktop", viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 },
+    { name: "mobile", viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
+  ];
+  for (const size of sizes) {
+    const { name, ...opts } = size;
+    if (tour) {
+      const ctx = await browser.newContext(opts);
+      await ctx.addInitScript(() => sessionStorage.setItem("ct-awake", "1"));
+      const page = await ctx.newPage();
+      for (const r of routes) {
+        await page.goto(base + r, { waitUntil: "networkidle" });
+        await page.waitForTimeout(1600);
+        const total = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
+        const step = Math.round(opts.viewport.height * 0.9);
+        let i = 0;
+        for (let y = 0; y <= total + step - 1; y += step, i++) {
+          await page.evaluate((top) => window.scrollTo(0, top), Math.min(y, total));
+          await page.waitForTimeout(650);
+          const file = path.join(outDir, `tour-${name}-${slug(r)}-${String(i).padStart(2, "0")}.png`);
+          await page.screenshot({ path: file });
+        }
+        console.log(`${name} ${r}: ${i} frames`);
+      }
+      await ctx.close();
+      continue;
+    }
+    const ctx = await browser.newContext({ ...opts, reducedMotion: "reduce" });
+    const page = await ctx.newPage();
+    for (const r of routes) {
+      await page.goto(base + r, { waitUntil: "networkidle" });
+      await page.waitForTimeout(300);
+      const file = path.join(outDir, `${name}-${slug(r)}.png`);
+      await page.screenshot({ path: file, fullPage: true });
+      console.log(file);
+    }
+    await ctx.close();
+
+    const live = await browser.newContext(opts);
+    const hero = await live.newPage();
+    await hero.goto(base + "/", { waitUntil: "networkidle" });
+    await hero.waitForTimeout(900);
+    await hero.screenshot({ path: path.join(outDir, `${name}-hero-dormant.png`) });
+    await hero.mouse.move(opts.viewport.width * 0.66, opts.viewport.height * 0.5);
+    await hero.waitForTimeout(400);
+    await hero.mouse.move(opts.viewport.width * 0.72, opts.viewport.height * 0.46, { steps: 8 });
+    await hero.waitForTimeout(3200);
+    const heroFile = path.join(outDir, `${name}-hero-awake.png`);
+    await hero.screenshot({ path: heroFile });
+    console.log(heroFile);
+    await live.close();
+  }
+  await browser.close();
+} finally {
+  // Windows: kill the whole tree while the shell wrapper is still alive, or `next` is orphaned.
+  if (process.platform === "win32" && server.pid) spawnSync("taskkill", ["/pid", String(server.pid), "/T", "/F"], { stdio: "ignore" });
+  else server.kill();
+}

@@ -1,0 +1,532 @@
+@import "tailwindcss";
+
+/*
+ * Clynera Tech design tokens. Rationale: docs/DESIGN_SYSTEM.md.
+ *
+ * Brand colours are sampled from the supplied logo: ink is the navy of the
+ * wordmark and the outer maze paths, signal is the teal of the arrow, tide is
+ * the steel blue in between. Contrast pairs are listed in the design system
+ * doc; signal-600 and lighter are for graphics, never small text on paper.
+ */
+@theme {
+  --color-ink-950: #07112f;
+  --color-ink-900: #08143c;
+  --color-ink-800: #13225a;
+  --color-ink-700: #26346a;
+  --color-ink-600: #3e4a72;
+  --color-ink-500: #59648a;
+  --color-ink-400: #7e88a8;
+  --color-ink-300: #aeb6ce;
+  --color-ink-200: #d3d7e3;
+  --color-ink-100: #e6e8ee;
+
+  --color-signal-300: #3fe0cc;
+  --color-signal-400: #14c9b5;
+  --color-signal-500: #02b5a3;
+  --color-signal-600: #0b8f83;
+  --color-signal-700: #08776d;
+
+  --color-tide-400: #4a9ac0;
+  --color-tide-500: #2c7ba8;
+  --color-tide-600: #1c5f8c;
+
+  --color-paper: #f2f1ec;
+  --color-paper-2: #e8e7e0;
+  --color-chalk: #fbfbf8;
+  --color-danger: #b42318;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-frame: 3px;
+  --radius-panel: 14px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 0.75, 0.2);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --shadow-lift: 0 30px 60px -30px rgb(7 17 47 / 0.35);
+}
+
+:root {
+  /* Motion: micro, component, section, cinematic. Nothing else. */
+  --dur-micro: 160ms;
+  --dur-component: 320ms;
+  --dur-section: 700ms;
+  --dur-cinematic: 1400ms;
+
+  /* Layers */
+  --z-raised: 10;
+  --z-header: 50;
+  --z-overlay: 60;
+
+  /* Layout */
+  --container: 86rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --header-h: 4.25rem;
+
+  /* Where the last navigation started; page transitions collapse to and grow from it. */
+  --vt-x: 50%;
+  --vt-y: 40%;
+
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    font-variation-settings: "wdth" 100;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  ::selection {
+    background: var(--color-signal-300);
+    color: var(--color-ink-950);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-signal-600);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  [data-tone="dark"] :focus-visible {
+    outline-color: var(--color-signal-300);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+/*
+ * Typography roles. One family (Archivo, variable): the width axis carries
+ * the hierarchy. Wide for statements, normal for reading, narrow for metadata.
+ */
+@utility t-display {
+  font-size: clamp(2.25rem, 10vw, 11.5rem);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+  font-variation-settings: "wdth" 125;
+  text-transform: uppercase;
+}
+@utility t-h1 {
+  font-size: clamp(2.4rem, 6.4vw, 6.8rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  font-variation-settings: "wdth" 125;
+  text-transform: uppercase;
+}
+@utility t-h2 {
+  font-size: clamp(2.2rem, 4.8vw, 4.9rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  font-weight: 780;
+  font-variation-settings: "wdth" 118;
+  text-transform: uppercase;
+}
+@utility t-h3 {
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 680;
+  font-variation-settings: "wdth" 108;
+}
+@utility t-lead {
+  font-size: clamp(1.1rem, 1.45vw, 1.35rem);
+  line-height: 1.5;
+  font-weight: 400;
+}
+@utility t-meta {
+  font-size: 0.74rem;
+  line-height: 1.25;
+  letter-spacing: 0.18em;
+  font-weight: 640;
+  font-variation-settings: "wdth" 70;
+  text-transform: uppercase;
+}
+@utility t-label {
+  font-size: 0.95rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  font-weight: 650;
+  font-variation-settings: "wdth" 112;
+  text-transform: uppercase;
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* The diamond lattice: the logo's 45 degree grid, used as a quiet surface texture. */
+@utility lattice-bg {
+  background-image:
+    repeating-linear-gradient(45deg, rgb(8 20 60 / 0.055) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(-45deg, rgb(8 20 60 / 0.055) 0 1px, transparent 1px 64px);
+}
+@utility lattice-bg-dark {
+  background-image:
+    repeating-linear-gradient(45deg, rgb(174 182 206 / 0.07) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(-45deg, rgb(174 182 206 / 0.07) 0 1px, transparent 1px 64px);
+}
+
+/* ------------------------------------------------------------ components */
+
+@layer components {
+  .link-line {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size var(--dur-component) var(--ease-out);
+  }
+  .link-line:hover,
+  .link-line:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Node marker: the logo's small square, rotated. */
+  .node {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    transform: rotate(45deg);
+    background: var(--color-signal-500);
+    flex: none;
+  }
+
+  .tag-illustration {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    border-radius: 999px;
+    background: rgb(7 17 47 / 0.72);
+    color: #fff;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* ------------------------------------------------------------ hero states */
+
+/*
+ * The home hero starts DORMANT (a near-empty field: "Start here") and wakes on
+ * the first interaction or after a short pause. The inline script in layout
+ * sets html[data-js]; without JavaScript, everything is visible from the start.
+ * html[data-awake] (same session, or reduced motion) skips the dormant state.
+ */
+/* Only opacity and position change: the heading and links stay in the accessibility tree throughout. */
+.hero-awake {
+  transition:
+    opacity var(--dur-section) var(--ease-out),
+    transform var(--dur-cinematic) var(--ease-out);
+}
+.hero-dormant {
+  transition:
+    opacity var(--dur-section) var(--ease-out),
+    transform var(--dur-cinematic) var(--ease-out),
+    visibility 0s linear var(--dur-section);
+}
+html[data-js]:not([data-awake]) [data-hero="dormant"] .hero-awake {
+  opacity: 0;
+  transform: translate3d(0, 2.5rem, 0);
+}
+html[data-js]:not([data-awake]) [data-hero="dormant"] .hero-awake.delay-1 {
+  transform: translate3d(0, 3.5rem, 0);
+}
+[data-hero="awake"] .hero-awake.delay-1 {
+  transition-delay: 120ms;
+}
+[data-hero="awake"] .hero-awake.delay-2 {
+  transition-delay: 260ms;
+}
+[data-hero="awake"] .hero-dormant,
+html[data-awake] .hero-dormant,
+html:not([data-js]) .hero-dormant {
+  opacity: 0;
+  transform: scale(0.92);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Hero image emerges from the system: a diamond mask that opens from the core. */
+.hero-image {
+  clip-path: polygon(70% 50%, 70% 50%, 70% 50%, 70% 50%);
+  transition: clip-path 1800ms var(--ease-out) 200ms;
+}
+[data-hero="awake"] .hero-image,
+html[data-awake] .hero-image,
+html:not([data-js]) .hero-image {
+  clip-path: polygon(70% -60%, 160% 50%, 70% 160%, -20% 50%);
+}
+@media (max-width: 1023px) {
+  .hero-image {
+    clip-path: polygon(50% 65%, 50% 65%, 50% 65%, 50% 65%);
+  }
+  [data-hero="awake"] .hero-image,
+  html[data-awake] .hero-image,
+  html:not([data-js]) .hero-image {
+    clip-path: polygon(50% -40%, 150% 65%, 50% 170%, -50% 65%);
+  }
+}
+
+/* ------------------------------------------------------------ section motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Content rises into place as it enters. Transform only, so it is visible and measurable from first paint. */
+    .rise {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+    @keyframes rise {
+      from {
+        transform: translate3d(0, 3rem, 0);
+      }
+      to {
+        transform: none;
+      }
+    }
+
+    /* Depth: foreground, midground and background drift at different speeds. */
+    .depth-1,
+    .depth-2,
+    .depth-3 {
+      animation: depth linear both;
+      animation-timeline: view();
+    }
+    .depth-1 {
+      --depth: -3rem;
+    }
+    .depth-2 {
+      --depth: -7rem;
+    }
+    .depth-3 {
+      --depth: -12rem;
+    }
+    @keyframes depth {
+      from {
+        transform: translate3d(0, calc(var(--depth) * -1), 0);
+      }
+      to {
+        transform: translate3d(0, var(--depth), 0);
+      }
+    }
+
+    /* Large words slide toward each other: "Ideas are easy." / "Execution isn't." */
+    .slide-in-left,
+    .slide-in-right {
+      animation: slide-x linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+    .slide-in-left {
+      --from: -18vw;
+    }
+    .slide-in-right {
+      --from: 18vw;
+    }
+    @keyframes slide-x {
+      from {
+        transform: translate3d(var(--from), 0, 0);
+      }
+      to {
+        transform: none;
+      }
+    }
+
+    /* Lines draw as their section enters. */
+    .draw-on-view {
+      stroke-dasharray: 1;
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 50%;
+    }
+    @keyframes draw {
+      from {
+        stroke-dashoffset: 1;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+}
+
+/* ------------------------------------------------------------ ambient loops (scenes) */
+
+@media (prefers-reduced-motion: no-preference) {
+  .anim-flow {
+    stroke-dasharray: 0.06 0.94;
+    animation: flow 3.2s linear infinite;
+  }
+  .anim-flow-slow {
+    stroke-dasharray: 0.04 0.96;
+    animation: flow 6s linear infinite;
+  }
+  @keyframes flow {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .anim-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pulse 2.6s var(--ease-io) infinite;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+  }
+  .anim-float {
+    animation: float 6s var(--ease-io) infinite;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -10px, 0);
+    }
+  }
+  .anim-snap {
+    animation: snap 6s var(--ease-out) infinite both;
+  }
+  @keyframes snap {
+    0% {
+      transform: translate3d(var(--sx, 0), var(--sy, -24px), 0);
+      opacity: 0;
+    }
+    18%,
+    80% {
+      transform: none;
+      opacity: 1;
+    }
+    100% {
+      transform: none;
+      opacity: 0;
+    }
+  }
+  .anim-spin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin 18s linear infinite;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .anim-scan {
+    animation: scan 4s var(--ease-io) infinite;
+  }
+  @keyframes scan {
+    0%,
+    100% {
+      transform: translate3d(0, -120px, 0);
+    }
+    50% {
+      transform: translate3d(0, 120px, 0);
+    }
+  }
+  .anim-draw-loop {
+    stroke-dasharray: 1;
+    animation: draw-loop 6s var(--ease-io) infinite;
+  }
+  @keyframes draw-loop {
+    0% {
+      stroke-dashoffset: 1;
+    }
+    45%,
+    80% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: -1;
+    }
+  }
+  .anim-fade-loop {
+    animation: fade-loop 6s var(--ease-io) infinite;
+  }
+  @keyframes fade-loop {
+    0%,
+    30% {
+      opacity: 1;
+    }
+    50%,
+    90% {
+      opacity: 0.08;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .scene-enter > * {
+    animation: scene-in var(--dur-section) var(--ease-out) both;
+  }
+  @keyframes scene-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-only {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------ page transitions */
+
+/*
+ * System transition: the current page collapses into the point that was
+ * clicked, and the next page grows out of it. Driven by React's
+ * <ViewTransition> (see layout.tsx); browsers without the View Transitions
+ * API navigate normally.
+ */
+::view-transition-old(.page) {
+  animation: vt-collapse 420ms var(--ease-in) both;
+}
+::view-transition-new(.page) {
+  animation: vt-grow 680ms var(--ease-out) 160ms both;
+}
+@keyframes vt-collapse {
+  to {
+    clip-path: circle(0.5% at var(--vt-x) var(--vt-y));
+    opacity: 0.6;
+  }
+}
+@keyframes vt-grow {
+  from {
+    clip-path: circle(0.5% at var(--vt-x) var(--vt-y));
+  }
+  to {
+    clip-path: circle(150% at var(--vt-x) var(--vt-y));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
