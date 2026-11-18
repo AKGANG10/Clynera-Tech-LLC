@@ -7,12 +7,17 @@
 - Lighthouse 13.6 (local `next start`): home 95 mobile / 100 desktop performance, contact 98 / 100; best practices and SEO 100. Accessibility 97 on home before the industry-label contrast fix, 100 on contact. Re-measure on the deployed site.
 - Browser checks: hero dormant and awake, System separation and reconnection, Build stages, Industries pinned track, capability hover, finale, mobile menu; desktop and 390px phone.
 
-## Launch blockers (need Clynera Tech)
+## Live (2026-11-19)
 
-1. Import the repo into Vercel and set the environment variables (DEPLOY.md).
-2. Add the domain records Vercel shows in Northwest DNS (DEPLOY.md).
-3. Configure the EmailJS template and security settings, then one real test inquiry (EMAIL_SETUP.md).
-4. Review the content listed in CONTENT_INVENTORY.md, including the three articles.
+- https://clyneratech.com on Vercel project `clyneratechllc`. Northwest records A @ 216.198.79.1 and 64.29.17.1, CNAME www to d78caff1d8fc370a.vercel-dns-017.com, published on both authoritative servers and on Google DNS; Vercel reports both domains configured correctly. MX, SPF and DKIM unchanged.
+- Let's Encrypt certificates for the apex and www on both Vercel IPs, valid to 2027-02-16. www and http redirect (308) to https://clyneratech.com.
+- All routes 200, 404 page for unknown paths, CSP, HSTS and X-Frame-Options present, canonical URLs on clyneratech.com, EIN and E-Verify ID absent.
+- Real inquiry CT-TJJDSE52 from the live form arrived at hr@clyneratech.com with all fields (subject, Dallas time, reply-to).
+
+## Next (need Clynera Tech)
+
+1. Review the content listed in CONTENT_INVENTORY.md, including the three articles.
+2. Set the GitHub default branch to main (production currently builds from build/initial-site, kept identical to main).
 
 ## Soon after launch
 

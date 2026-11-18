@@ -20,6 +20,10 @@ Set the template so it notifies the team (if it is EmailJS's stock auto-reply, i
 - **Content:** `{{body}}` (plain text; it holds every field the visitor filled in, one per line)
 - **From Name:** `Clynera Tech website`
 
+## Verified 2026-11-19
+
+Non-browser API access enabled; live inquiry CT-TJJDSE52 arrived at hr@clyneratech.com with all fields and the visitor as reply-to.
+
 ## Verify
 
 Send one real inquiry from the live site. The email must arrive at hr@clyneratech.com with subject like `Technology inquiry from <name> (CT-XXXXXXXX)`, and Reply must address the visitor. If sending fails, the reason is in `vercel logs --environment production` as `[inquiry] CT-... emailjs rejected: <status> <reason>`.
