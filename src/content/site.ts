@@ -8,8 +8,9 @@ export const company = {
   legalName: "Clynera Tech LLC",
   shortName: "Clynera Tech",
   category: "IT services, IT consulting and IT staffing",
+  tagline: "Every system is a maze. We find the way through.",
   description:
-    "Clynera Tech is a technology and talent company in Dallas, Texas. We provide IT services, IT consulting and IT staffing, so the systems you need and the people who run them work as one.",
+    "Clynera Tech guides organizations through complex technology. IT services, IT consulting and IT staffing from Dallas, Texas: the map, the build and the specialists, from one partner.",
   email: "hr@clyneratech.com",
   phone: { display: "+1 (214) 899-0028", e164: "+12148990028", href: "tel:+12148990028" },
   address: {
@@ -27,16 +28,17 @@ export const formattedAddress = `${company.address.street}, ${company.address.lo
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://clyneratech.com").replace(/\/$/, "");
 
 export const mainNav = [
-  { href: "/work", label: "Work" },
   { href: "/capabilities", label: "Capabilities" },
-  { href: "/people", label: "People" },
+  { href: "/work", label: "Work" },
+  { href: "/people", label: "Talent" },
+  { href: "/careers", label: "Careers" },
   { href: "/insights", label: "Insights" },
+  { href: "/about", label: "About" },
 ] as const;
 
 export const secondaryNav = [
-  { href: "/company", label: "Company" },
+  { href: "/careers/jobs", label: "Search jobs" },
   { href: "/contact", label: "Contact" },
-  { href: "/contact?topic=careers", label: "Careers" },
 ] as const;
 
 export const legalNav = [
@@ -44,10 +46,10 @@ export const legalNav = [
   { href: "/terms", label: "Terms" },
 ] as const;
 
-/** Contact directions offered at the end of every journey. */
+/** The four ways into a conversation. */
 export const contactTopics = [
-  { topic: "technology", label: "Technology", line: "Build, modernize or secure a system." },
-  { topic: "talent", label: "Talent", line: "Hire engineers, architects and specialists." },
-  { topic: "partnership", label: "Partnership", line: "Work with us as a partner or vendor." },
-  { topic: "careers", label: "Careers", line: "Join our talent network." },
+  { topic: "technology", label: "Technology", line: "Something to build, fix, move or secure." },
+  { topic: "talent", label: "Hiring", line: "Specialists for a role, a squad or a deadline." },
+  { topic: "partnership", label: "Partnership", line: "Work alongside us as a partner or vendor." },
+  { topic: "careers", label: "Careers", line: "Your next role in technology." },
 ] as const;

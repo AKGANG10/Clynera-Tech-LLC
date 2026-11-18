@@ -14,6 +14,8 @@ import { EMAILJS_PORT, MOCK_EMAILJS_PORT, UNCONFIGURED_PORT } from "./e2e/ports"
  */
 const PORT = Number(process.env.E2E_PORT ?? 3100);
 const channel = process.env.PW_CHANNEL ?? "msedge";
+// E2E_ONLY_MAIN=1 starts just the main server (low-memory local runs; skip email-delivery.spec.ts).
+const onlyMain = process.env.E2E_ONLY_MAIN === "1";
 const browser = channel === "chromium" ? {} : { channel };
 
 export default defineConfig({
@@ -43,36 +45,40 @@ export default defineConfig({
       timeout: 120_000,
       env: { E2E_TEST_MODE: "1", INQUIRY_DELIVERY: "log", INQUIRY_RATE_LIMIT_MAX: "8" },
     },
-    // Mock of the EmailJS REST API.
-    {
-      command: `node e2e/mock-emailjs.mjs ${MOCK_EMAILJS_PORT}`,
-      url: `http://localhost:${MOCK_EMAILJS_PORT}/health`,
-      reuseExistingServer: false,
-    },
-    // Real EmailJS adapter, pointed at the mock. Fake keys; real template ID.
-    {
-      command: `npx next start -p ${EMAILJS_PORT}`,
-      url: `http://localhost:${EMAILJS_PORT}`,
-      reuseExistingServer: false,
-      timeout: 120_000,
-      env: {
-        E2E_TEST_MODE: "1",
-        INQUIRY_DELIVERY: "emailjs",
-        EMAILJS_API_URL: `http://localhost:${MOCK_EMAILJS_PORT}/api/v1.0/email/send`,
-        EMAILJS_SERVICE_ID: "service_e2e",
-        EMAILJS_TEMPLATE_ID: "template_lcsit4b",
-        EMAILJS_PUBLIC_KEY: "public_e2e",
-        EMAILJS_PRIVATE_KEY: "private_e2e",
-        INQUIRY_RATE_LIMIT_MAX: "50",
-      },
-    },
-    // Production with no delivery configured: must refuse, never fake success.
-    {
-      command: `npx next start -p ${UNCONFIGURED_PORT}`,
-      url: `http://localhost:${UNCONFIGURED_PORT}`,
-      reuseExistingServer: false,
-      timeout: 120_000,
-      env: { INQUIRY_DELIVERY: "", INQUIRY_RATE_LIMIT_MAX: "50" },
-    },
+    ...(onlyMain
+      ? []
+      : [
+        // Mock of the EmailJS REST API.
+        {
+          command: `node e2e/mock-emailjs.mjs ${MOCK_EMAILJS_PORT}`,
+          url: `http://localhost:${MOCK_EMAILJS_PORT}/health`,
+          reuseExistingServer: false,
+        },
+        // Real EmailJS adapter, pointed at the mock. Fake keys; real template ID.
+        {
+          command: `npx next start -p ${EMAILJS_PORT}`,
+          url: `http://localhost:${EMAILJS_PORT}`,
+          reuseExistingServer: false,
+          timeout: 120_000,
+          env: {
+            E2E_TEST_MODE: "1",
+            INQUIRY_DELIVERY: "emailjs",
+            EMAILJS_API_URL: `http://localhost:${MOCK_EMAILJS_PORT}/api/v1.0/email/send`,
+            EMAILJS_SERVICE_ID: "service_e2e",
+            EMAILJS_TEMPLATE_ID: "template_lcsit4b",
+            EMAILJS_PUBLIC_KEY: "public_e2e",
+            EMAILJS_PRIVATE_KEY: "private_e2e",
+            INQUIRY_RATE_LIMIT_MAX: "50",
+          },
+        },
+        // Production with no delivery configured: must refuse, never fake success.
+        {
+          command: `npx next start -p ${UNCONFIGURED_PORT}`,
+          url: `http://localhost:${UNCONFIGURED_PORT}`,
+          reuseExistingServer: false,
+          timeout: 120_000,
+          env: { INQUIRY_DELIVERY: "", INQUIRY_RATE_LIMIT_MAX: "50" },
+        },
+        ]),
   ],
 });

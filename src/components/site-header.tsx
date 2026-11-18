@@ -81,7 +81,7 @@ export function SiteHeader() {
         </p>
 
         <nav aria-label="Main" className="ml-auto hidden lg:block">
-          <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-6 xl:gap-8">
             {mainNav.map((item) => (
               <li key={item.href}>
                 <Link
@@ -97,7 +97,7 @@ export function SiteHeader() {
         </nav>
 
         <Link href="/contact" className={cx(buttonClass("primary", dark ? "dark" : "light"), "min-h-11 px-5 text-[0.74rem] max-sm:hidden")}>
-          Start a project
+          Talk to a guide
           <Arrow className="transition-transform duration-[var(--dur-component)] group-hover:translate-x-1" />
         </Link>
 
@@ -154,7 +154,7 @@ export function SiteHeader() {
             ))}
           </ul>
           <Link href="/contact" className={cx(buttonClass("primary", "dark"), "self-start")}>
-            Start a project
+            Talk to a guide
             <Arrow />
           </Link>
         </nav>

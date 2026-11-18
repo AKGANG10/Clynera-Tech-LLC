@@ -9,7 +9,7 @@ import type { FullConfig } from "@playwright/test";
  * every route once (HTML and the RSC payload used by client navigation)
  * means tests measure behaviour, not cold start.
  */
-export const routes = ["/", "/capabilities", "/work", "/people", "/insights", "/insights/why-ai-projects-stall-before-production", "/company", "/contact", "/privacy", "/terms"];
+export const routes = ["/", "/capabilities", "/work", "/people", "/careers", "/careers/jobs", "/insights", "/insights/start-your-ai-project-with-a-spreadsheet", "/about", "/contact", "/privacy", "/terms"];
 
 export default async function globalSetup(config: FullConfig) {
   const baseURL = config.projects[0]?.use.baseURL;

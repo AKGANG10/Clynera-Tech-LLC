@@ -6,7 +6,7 @@ import { LatticeEngine, type EngineInput } from "./lattice-engine";
 import { Arrow, buttonClass } from "./ui";
 
 /**
- * Home hero. STATE 01 DORMANT: an almost empty field ("Start here").
+ * Home hero. STATE 01 DORMANT: an almost empty field ("Every maze has a way out").
  * STATE 02 AWAKEN: the first move, scroll or key press (or a short pause)
  * grows the system and reveals the company. Text is server-rendered and in the
  * DOM from the start; only its visibility changes.
@@ -125,7 +125,7 @@ export function SystemHero({ imageDesktop, imageMobile, hasImage }: { imageDeskt
     <section
       ref={root}
       data-hero={state}
-      data-chapter="01 / Start"
+      data-chapter="01 / Entry"
       data-tone="dark"
       aria-labelledby="hero-title"
       className="relative isolate flex min-h-[max(100svh,40rem)] flex-col overflow-hidden bg-ink-950 text-paper"
@@ -141,11 +141,11 @@ export function SystemHero({ imageDesktop, imageMobile, hasImage }: { imageDeskt
 
       {/* STATE 01: dormant. Decorative; the real heading below is always in the document. */}
       <div aria-hidden="true" className="hero-dormant pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <p className="t-meta text-ink-300">Everything starts somewhere.</p>
-        <p className="t-display mt-6 text-paper">Start here.</p>
+        <p className="t-meta text-ink-300">Start anywhere</p>
+        <p className="t-display mt-6 max-w-[14ch] text-paper">Every maze has a way out.</p>
         <p className="t-meta mt-10 flex items-center gap-3 text-ink-400">
           <span className="node anim-pulse" />
-          Move, scroll or press any key
+          Move, scroll or press a key
         </p>
       </div>
 
@@ -154,22 +154,20 @@ export function SystemHero({ imageDesktop, imageMobile, hasImage }: { imageDeskt
         <div className="max-w-[44rem] lg:max-w-[48%]">
           <p className="hero-awake t-meta flex items-center gap-3 text-signal-300">
             <span className="node" aria-hidden="true" />
-            Technology / Talent / Intelligence
+            Engineering / Advisory / Talent
           </p>
           <h1 id="hero-title" className="hero-awake delay-1 t-h1 mt-7 text-paper">
-            We build
-            <br />
-            what&apos;s next.
+            We find the way through.
           </h1>
-          <p className="hero-awake delay-2 t-lead mt-8 max-w-xl text-ink-200">Technology, people and intelligence working together to move ambitious ideas forward.</p>
-          <p className="hero-awake delay-2 mt-4 max-w-xl text-[0.95rem] text-ink-300">An IT services, IT consulting and IT staffing company in Dallas, Texas.</p>
+          <p className="hero-awake delay-2 t-lead mt-8 max-w-xl text-ink-200">Software, cloud, data and AI, plus the specialists to run them, mapped into one clear route from where you are to where you need to be.</p>
+          <p className="hero-awake delay-2 mt-4 max-w-xl text-[0.95rem] text-ink-300">IT services, IT consulting and IT staffing. Headquartered in Dallas, Texas.</p>
           <div className="hero-awake delay-2 mt-10 flex flex-wrap gap-3">
             <a href="#system" className={buttonClass("primary", "dark")}>
-              Enter the system
+              Find your route
               <Arrow className="rotate-90 transition-transform duration-[var(--dur-component)] group-hover:translate-y-1" />
             </a>
-            <Link href="/company" className={buttonClass("secondary", "dark")}>
-              Meet the company
+            <Link href="/about" className={buttonClass("secondary", "dark")}>
+              About Clynera
               <Arrow className="transition-transform duration-[var(--dur-component)] group-hover:translate-x-1" />
             </Link>
           </div>
@@ -178,10 +176,10 @@ export function SystemHero({ imageDesktop, imageMobile, hasImage }: { imageDeskt
 
       <div className="hero-awake delay-2 container-x relative flex items-end justify-between gap-6 pb-8">
         <p className="t-meta text-ink-400">
-          Technology <span aria-hidden="true">·</span> People <span aria-hidden="true">·</span> Intelligence <span aria-hidden="true">·</span> Possibility
+          Map <span aria-hidden="true">·</span> Build <span aria-hidden="true">·</span> Staff <span aria-hidden="true">·</span> Scale
         </p>
         <p aria-hidden="true" className="t-meta hidden items-center gap-3 text-ink-400 sm:flex">
-          01 / Start
+          01 / Entry
           <span className="block h-10 w-px bg-gradient-to-b from-ink-400 to-transparent" />
         </p>
       </div>

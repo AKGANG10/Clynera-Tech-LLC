@@ -5,15 +5,15 @@ import { Visual } from "@/components/visual";
 import { formatDate, insights, readingMinutes } from "@/content/insights";
 
 export const metadata: Metadata = {
-  title: "Insights: Thinking Out Loud",
-  description: "Points of view from Clynera Tech on AI in production, talent as a system, and adaptive software.",
+  title: "Field Notes: Insights on AI, Cloud and Hiring",
+  description: "Short, practical field notes from Clynera Tech on starting AI projects, hiring technical specialists and running cloud migrations.",
   alternates: { canonical: "/insights" },
 };
 
 export default function InsightsPage() {
   return (
     <>
-      <PageIntro id="insights-page-title" index="09" name="Insights" title="Thinking out loud." lead="What we believe about technology, talent and the systems between them." />
+      <PageIntro id="insights-page-title" index="09" name="Field notes" title="Field notes." lead="Short, practical notes on AI, cloud, data and hiring, written from inside the work." />
       <Chapter index="09" name="Articles" aria-label="Articles" className="pb-32">
         <Container>
           <ol className="grid gap-16 md:grid-cols-2 lg:grid-cols-3">

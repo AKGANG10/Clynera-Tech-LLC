@@ -6,8 +6,8 @@ import { Visual } from "@/components/visual";
 import { principles } from "@/content/world";
 
 export const metadata: Metadata = {
-  title: "Work: How We Build",
-  description: "How Clynera Tech turns ideas into working systems, and concept explorations of what we can build. Clearly labelled concepts, not client claims.",
+  title: "Work: How We Find the Route",
+  description: "How Clynera Tech takes a project from first question to running system, with concept routes we are ready to run. Concepts are labelled; no borrowed case studies.",
   alternates: { canonical: "/work" },
 };
 
@@ -17,25 +17,25 @@ export default function WorkPage() {
       <PageIntro
         id="work-page-title"
         index="07"
-        name="Work"
-        title="Execution is the work."
-        lead="We do not have public case studies to show yet, so we will not invent any. Here is how we build, and concept explorations of what we can build, clearly labelled as such."
+        name="Proof"
+        title="Proof beats promises."
+        lead="We will not borrow other people's case studies or invent our own. Here is exactly how we work, and the kinds of routes we are ready to run, each one labelled as a concept."
       >
         <div className="mt-16">
           <Visual name="build" priority sizes="(min-width: 1344px) 1300px, 100vw" />
         </div>
       </PageIntro>
 
-      <Chapter index="04" name="Build" tone="dark" aria-labelledby="work-build-title">
+      <Chapter index="04" name="Blueprint" tone="dark" aria-labelledby="work-build-title">
         <BuildSequence headingId="work-build-title" />
       </Chapter>
 
       <WorkChapter index="07" headingId="work-concepts-title" limit={4} full />
 
-      <Chapter index="07" name="Principles" aria-labelledby="principles-title" className="py-28">
+      <Chapter index="07" name="Rules" aria-labelledby="principles-title" className="py-28">
         <Container>
           <h2 id="principles-title" className="t-h2 text-ink-950">
-            How we hold ourselves to it.
+            The rules we travel by.
           </h2>
           <ul className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {principles.map((p) => (

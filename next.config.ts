@@ -64,6 +64,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Renamed on 2026-11-19, shortly after launch: keep the first URLs working.
+      { source: "/company", destination: "/about", permanent: true },
+      ...["why-ai-projects-stall-before-production", "the-talent-problem-is-a-system-problem", "what-happens-when-software-becomes-adaptive"].map((slug) => ({ source: `/insights/${slug}`, destination: "/insights", permanent: true })),
       ...(wwwHost
         ? [
             {

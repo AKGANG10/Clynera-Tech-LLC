@@ -6,8 +6,8 @@ import { diagonalPath } from "@/lib/lattice";
 import { cx } from "./ui";
 
 /**
- * THE HUMAN NETWORK. People connect to skills, skills to roles, roles to
- * projects, projects to companies and companies to opportunity. Selecting any
+ * WHERE SKILLS MEET THE WORK. Specialists connect to skills, skills to roles,
+ * roles to projects, projects to employers and employers to an engagement. Selecting any
  * node lights the paths through it and describes them in text. Lines are
  * computed from the rendered layout, so the same component works as six
  * columns (desktop) and a vertical journey (phones).
@@ -29,10 +29,10 @@ const edgesOf = (c: Chain): [string, string][] => [
 const EDGES = Array.from(new Map(network.chains.flatMap(edgesOf).map((e) => [e.join("|"), e])).values());
 
 const an = (w: string) => (/^[aeiou]/i.test(w) ? `an ${w}` : `a ${w}`);
-const describe = (c: Chain) => `${c[0]}, with ${c[1]} and ${c[2]}, works as ${an(c[3])} on ${an(c[4])} project for ${an(c[5])}, as ${an(c[6].toLowerCase())} role.`;
+const describe = (c: Chain) => `${c[0]} brings ${c[1]} and ${c[2]} to ${an(c[3])} role on the ${c[4]} for ${an(c[5].toLowerCase())}, as ${an(c[6].toLowerCase())} engagement.`;
 
 export function HumanNetwork() {
-  const [selected, setSelected] = useState<string>("Person B");
+  const [selected, setSelected] = useState<string>("Specialist 2");
   const box = useRef<HTMLDivElement>(null);
   const svg = useRef<SVGSVGElement>(null);
   const [paths, setPaths] = useState<{ key: string; d: string }[]>([]);
@@ -113,7 +113,7 @@ export function HumanNetwork() {
         </div>
       </div>
       <div className="mt-12 grid gap-6 border-t border-ink-800 pt-8 lg:grid-cols-12">
-        <p className="t-meta text-ink-400 lg:col-span-3">Illustrative example, not real candidates</p>
+        <p className="t-meta text-ink-400 lg:col-span-3">Example routes, not real candidates</p>
         <div aria-live="polite" className="space-y-2 text-[1.02rem] leading-relaxed text-ink-200 lg:col-span-9">
           {chains.map((c) => (
             <p key={c.join()}>{describe(c)}</p>

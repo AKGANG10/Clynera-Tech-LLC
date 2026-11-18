@@ -1,10 +1,10 @@
 import type { VisualKey } from "./visuals";
 
 /**
- * What Clynera Tech builds. Descriptions say what the service is and how it is
- * delivered; they make no claims about past clients or results.
- * Category words (IT services, IT consulting, IT staffing) are kept explicit
- * so visitors and search engines can tell what kind of company this is.
+ * What Clynera Tech does, written as routes through a maze (the brand idea,
+ * taken from the logo). Each entry says what the service is and how it is
+ * delivered; none makes a claim about past clients or results.
+ * Category words (IT services, IT consulting, IT staffing) stay explicit.
  */
 export type CapabilityId = "ai" | "software" | "cloud" | "data" | "security" | "automation" | "talent" | "consulting" | "experience";
 
@@ -23,96 +23,96 @@ export const capabilities: Capability[] = [
     id: "ai",
     name: "AI",
     category: "IT services",
-    line: "Intelligence as infrastructure for better decisions.",
-    body: "We design and build AI that earns its place in a workflow: document understanding, prediction, search and assistants, with evaluation, human review and fallbacks designed in from the start.",
-    deliver: ["Use-case discovery and feasibility", "Retrieval and assistant systems", "Model evaluation and monitoring", "Human review and audit trails"],
+    line: "Useful before it is impressive.",
+    body: "We pick the one decision AI can genuinely speed up, prove it on your own data, and only then wire it into daily work with review steps, logging and a plan for when the model is unsure.",
+    deliver: ["Opportunity scoring and quick proofs", "Search, summarizing and assistants over your documents", "Evaluation sets and drift monitoring", "Human sign-off where it matters"],
     visual: "ai",
   },
   {
     id: "software",
     name: "Software",
     category: "IT services",
-    line: "Products engineered to last longer than the launch.",
-    body: "Web platforms, internal tools, APIs and integrations, built with tested, typed, maintainable code and handed over with documentation your team can own.",
-    deliver: ["Web and product engineering", "APIs and integrations", "Modernization of legacy systems", "Quality engineering and test automation"],
+    line: "Code your next team will thank you for.",
+    body: "Web platforms, internal tools, APIs and integrations shipped in small, tested releases, with the documentation and handover that let your people own it after we leave.",
+    deliver: ["Product and platform engineering", "API design and system integration", "Legacy rewrites done in slices", "Automated testing and code review"],
     visual: "software",
   },
   {
     id: "cloud",
     name: "Cloud",
     category: "IT services",
-    line: "Infrastructure that scales without drama.",
-    body: "Cloud architecture, migration and DevOps: infrastructure as code, delivery pipelines, observability and cost control, on the provider that fits your constraints.",
-    deliver: ["Cloud architecture and migration", "Infrastructure as code", "CI/CD and release engineering", "Observability and cost reviews"],
+    line: "Infrastructure you never have to think about.",
+    body: "Architecture, migration and DevOps on AWS, Azure or Google Cloud: everything defined as code, every release through a pipeline, every cost visible before the invoice arrives.",
+    deliver: ["Landing zones and migrations", "Infrastructure as code", "Build and release pipelines", "Monitoring, alerting and cost tuning"],
     visual: "cloud",
   },
   {
     id: "data",
     name: "Data",
     category: "IT services",
-    line: "Signals that become decisions.",
-    body: "Data platforms, pipelines and analytics that turn scattered records into one trusted view, with the governance needed to keep it trusted.",
-    deliver: ["Data platforms and warehouses", "Pipelines and integration", "Analytics and reporting", "Data quality and governance"],
+    line: "One number everyone agrees on.",
+    body: "We trace where your figures come from, clean up the path, and give teams a single source they can query, report on and trust in meetings.",
+    deliver: ["Warehouse and lakehouse builds", "Pipelines and data integration", "Dashboards and self-serve reporting", "Quality checks and data ownership"],
     visual: "data",
   },
   {
     id: "security",
     name: "Cybersecurity",
     category: "IT services",
-    line: "Protection designed in, not bolted on.",
-    body: "Security reviews, secure architecture, identity and access, and the practical controls that let teams move quickly without widening the attack surface.",
-    deliver: ["Security assessments", "Identity and access management", "Secure architecture reviews", "Monitoring and response planning"],
+    line: "Locks fitted while the walls go up.",
+    body: "Security reviews, identity and access, and secure design built into the project plan, so protection never becomes the reason a launch slips.",
+    deliver: ["Risk and posture assessments", "Identity, access and least privilege", "Secure design reviews", "Incident readiness and playbooks"],
     visual: "security",
   },
   {
     id: "automation",
     name: "Automation",
     category: "IT services",
-    line: "Remove the work nobody should be doing by hand.",
-    body: "Workflow and process automation across the tools you already use, with clear ownership, error handling and a person in the loop where judgment matters.",
-    deliver: ["Process mapping", "Workflow and integration automation", "Robotic and scripted automation", "Exception handling and reporting"],
+    line: "Retire the copy-and-paste jobs.",
+    body: "We find the repetitive steps people quietly hate, automate them across the tools you already pay for, and keep a person in charge of the exceptions.",
+    deliver: ["Workflow discovery", "Integration and workflow automation", "Scripted and robotic process automation", "Exception queues and audit logs"],
   },
   {
     id: "talent",
     name: "Talent",
     category: "IT staffing",
-    line: "The right people, connected to the right work.",
-    body: "IT staffing and recruitment for technology roles: contract, contract-to-hire and direct hire, plus dedicated teams that plug into your delivery.",
-    deliver: ["Contract and contract-to-hire", "Direct hire", "Dedicated delivery teams", "Technical screening"],
+    line: "Specialists who arrive ready.",
+    body: "IT staffing for engineering, data, cloud and security roles: contract, contract-to-hire and direct hire, or a dedicated squad that joins your sprint on day one.",
+    deliver: ["Contract and contract-to-hire", "Direct-hire search", "Dedicated delivery squads", "Practitioner-led technical screening"],
   },
   {
     id: "consulting",
     name: "Consulting",
     category: "IT consulting",
-    line: "Business problems, turned into systems.",
-    body: "IT consulting that starts with the outcome: technology strategy, architecture, roadmaps and program leadership that connect decisions to delivery.",
-    deliver: ["Technology strategy and roadmaps", "Architecture advisory", "Program and delivery leadership", "Vendor and platform selection"],
+    line: "A map before the money moves.",
+    body: "IT consulting for the decisions that are expensive to undo: platform choices, architecture, roadmaps and the delivery plan that turns them into dates.",
+    deliver: ["Technology roadmaps", "Architecture reviews and second opinions", "Program recovery and delivery leadership", "Vendor and platform selection"],
   },
   {
     id: "experience",
     name: "Digital experience",
     category: "IT services",
-    line: "Interfaces people understand the first time.",
-    body: "Product design and front-end engineering for websites, portals and dashboards: accessible, fast and consistent across every screen size.",
-    deliver: ["Product and UX design", "Design systems", "Accessible front-end engineering", "Performance optimization"],
+    line: "Screens that explain themselves.",
+    body: "Product design and front-end engineering for sites, portals and dashboards, built accessible and fast on every screen, with a design system that keeps it consistent.",
+    deliver: ["Research and UX design", "Design systems", "Accessible front-end builds", "Speed and Core Web Vitals work"],
   },
 ];
 
-/** One object, seven states: how an idea becomes a system. */
+/** One object, seven states: the route from a question to a running system. */
 export const buildStages = [
-  { id: "idea", name: "Idea", body: "Every system starts as a point: a problem worth solving and a person who owns it." },
-  { id: "architecture", name: "Architecture", body: "We give the idea a structure: boundaries, data, integrations and the constraints that matter." },
-  { id: "design", name: "Design", body: "Shape and surface. Journeys, interfaces and states, designed before a line of production code." },
-  { id: "engineering", name: "Engineering", body: "The paths are built: typed, tested, reviewed code that the next team can read." },
-  { id: "intelligence", name: "Intelligence", body: "Signals start to move. Data and AI where they improve a decision, never as decoration." },
-  { id: "deployment", name: "Deployment", body: "The system goes live and scales out, with monitoring, rollback and runbooks in place." },
-  { id: "impact", name: "Impact", body: "It breaks out of the diagram and into the business. Then we measure, learn and build what's next." },
+  { id: "question", name: "Question", body: "We start with the problem in one sentence and the person who feels it most." },
+  { id: "blueprint", name: "Blueprint", body: "Boundaries, data, integrations and risks get drawn before anyone opens an editor." },
+  { id: "prototype", name: "Prototype", body: "Something real to click within days, so feedback arrives while change is cheap." },
+  { id: "build", name: "Build", body: "Short, reviewed, tested increments. Every path in the maze gets laid properly." },
+  { id: "learn", name: "Learn", body: "Data and AI switch on where they sharpen a decision, measured against the old way." },
+  { id: "launch", name: "Launch", body: "Live with monitoring, rollback and runbooks, then scaled out as demand shows up." },
+  { id: "grow", name: "Grow", body: "The arrow leaves the maze: results tracked, the next route already sketched." },
 ] as const;
 
-/** How clients can engage. */
+/** How clients can work with us. */
 export const engagementModels = [
-  { name: "Project delivery", body: "A defined outcome, a cross-functional team and a plan you can hold us to." },
-  { name: "Team extension", body: "Engineers and specialists who join your team, your tools and your rituals." },
-  { name: "Advisory", body: "Architecture, strategy and second opinions before the expensive decisions." },
-  { name: "Staffing", body: "Contract, contract-to-hire and direct-hire recruitment for technology roles." },
+  { name: "Outcome projects", body: "A fixed goal, a named team and milestones you can check us against." },
+  { name: "Embedded engineers", body: "Our people inside your squads, your tools and your stand-ups." },
+  { name: "Advisory sprints", body: "Two to six weeks of focused architecture or strategy work before a big commitment." },
+  { name: "IT staffing", body: "Contract, contract-to-hire and direct-hire placements for technology roles." },
 ] as const;

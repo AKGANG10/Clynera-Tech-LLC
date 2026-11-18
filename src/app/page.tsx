@@ -12,7 +12,7 @@ import { capabilities } from "@/content/capabilities";
 import { hasVisual } from "@/lib/visual-server";
 
 export const metadata: Metadata = {
-  title: { absolute: "Clynera Tech | IT Services, IT Consulting and IT Staffing in Dallas" },
+  title: { absolute: "Clynera Tech: IT Services, IT Consulting and IT Staffing, Dallas TX" },
   alternates: { canonical: "/" },
 };
 
@@ -40,48 +40,48 @@ export default function Home() {
         <Visual name="connects" rounded={false} sizes="100vw" className="max-sm:!aspect-[21/7]" />
       </div>
 
-      <Chapter id="system" index="02" name="System" aria-labelledby="system-title">
+      <Chapter id="system" index="02" name="Untangle" aria-labelledby="system-title">
         <SystemMap core={<Visual name="core" rounded={false} sizes="(min-width: 1024px) 22rem, 46vw" />} />
       </Chapter>
 
-      <Chapter index="03" name="Capabilities" aria-labelledby="capabilities-title" className="border-t border-ink-200 py-28 sm:py-36">
+      <Chapter index="03" name="Routes" aria-labelledby="capabilities-title" className="border-t border-ink-200 py-28 sm:py-36">
         <Container>
-          <ChapterLabel index="03" name="Capabilities" />
+          <ChapterLabel index="03" name="Routes" />
           <h2 id="capabilities-title" className="t-h2 mt-6 max-w-[16ch] text-ink-950">
-            What we build.
+            Nine routes we know by heart.
           </h2>
-          <p className="t-lead mt-6 max-w-2xl text-ink-600">IT services, IT consulting and IT staffing, as one map. Choose a capability to see how it works.</p>
+          <p className="t-lead mt-6 max-w-2xl text-ink-600">IT services, IT consulting and IT staffing on one map. Pick a route to see how we travel it.</p>
           <div className="mt-16">
             <CapabilityMap images={capabilityImages} detailHref="/capabilities" />
           </div>
         </Container>
       </Chapter>
 
-      <Chapter index="04" name="Build" tone="dark" aria-labelledby="build-title">
+      <Chapter index="04" name="Blueprint" tone="dark" aria-labelledby="build-title">
         <BuildSequence />
       </Chapter>
 
       <PeopleChapter />
 
-      <Chapter index="06" name="Network" tone="dark" aria-labelledby="network-title" className="overflow-hidden py-28 sm:py-36">
+      <Chapter index="06" name="Talent" tone="dark" aria-labelledby="network-title" className="overflow-hidden py-28 sm:py-36">
         <div aria-hidden="true" className="absolute inset-0 opacity-30">
           <Visual name="talent" rounded={false} className="!absolute inset-0 !aspect-auto size-full" sizes="100vw" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,#07112f_10%,rgb(7_17_47/0.6)_60%,rgb(7_17_47/0.85))]" />
         </div>
         <Container className="relative">
-          <ChapterLabel index="06" name="Network" tone="dark" />
-          <h2 id="network-title" className="t-h2 mt-6 max-w-[14ch] text-paper">
-            The human network.
+          <ChapterLabel index="06" name="Talent" tone="dark" />
+          <h2 id="network-title" className="t-h2 mt-6 max-w-[16ch] text-paper">
+            Where skills meet the work.
           </h2>
           <p className="t-lead mt-6 max-w-2xl text-ink-300">
-            Recruiting is a system, not a search. People connect to skills, skills to roles, roles to projects, and projects to the companies and opportunities that need
-            them. Choose any point to follow its paths.
+            Good staffing is route-finding: a specialist, their skills, the role, the project, the employer and the right kind of engagement, all lined up. Tap any point to
+            trace its route.
           </p>
           <div className="mt-16">
             <HumanNetwork />
           </div>
           <ArrowLink href="/people" tone="dark" className="mt-12">
-            Talent and careers
+            Talent and staffing
           </ArrowLink>
         </Container>
       </Chapter>
@@ -94,16 +94,16 @@ export default function Home() {
 
       <InsightsChapter index="09" />
 
-      <Chapter index="10" name="Company" aria-labelledby="story-title" className="border-t border-ink-200 bg-paper-2 py-28 sm:py-36">
+      <Chapter index="10" name="Story" aria-labelledby="story-title" className="border-t border-ink-200 bg-paper-2 py-28 sm:py-36">
         <Container>
-          <ChapterLabel index="10" name="Company" />
+          <ChapterLabel index="10" name="Story" />
           <h2 id="story-title" className="t-h2 mt-6 max-w-[18ch] text-ink-950">
-            Built around one idea.
+            Our route so far.
           </h2>
           <div className="mt-16">
             <StoryTimeline />
           </div>
-          <ArrowLink href="/company" className="mt-14">
+          <ArrowLink href="/about" className="mt-14">
             About Clynera Tech
           </ArrowLink>
         </Container>

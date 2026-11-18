@@ -24,24 +24,24 @@ test("capability map changes the environment by click and arrow keys", async ({ 
 
 test("the human network follows any selected point", async ({ page }) => {
   await page.goto("/people");
-  const network = page.getByRole("button", { name: "Python" });
+  const network = page.getByRole("button", { name: "SQL" });
   await network.click();
   await expect(network).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByText("Person A, with Python and Data modeling")).toBeVisible();
-  await expect(page.getByText("Person C, with React and Python")).toBeVisible();
-  await expect(page.getByText("Illustrative example, not real candidates")).toBeVisible();
+  await expect(page.getByText("Specialist 1 brings Java and SQL")).toBeVisible();
+  await expect(page.getByText("Specialist 3 brings TypeScript and SQL")).toBeVisible();
+  await expect(page.getByText("Example routes, not real candidates")).toBeVisible();
 });
 
 test("concept work is labelled as concept, not client work", async ({ page }) => {
   await page.goto("/work");
-  await expect(page.getByText("Concept / Exploration, not client work")).toBeVisible();
+  await expect(page.getByText("Concept, not client work")).toBeVisible();
 });
 
 test("contact form explains what is missing", async ({ page }) => {
   await page.goto("/contact");
   const form = page.getByRole("form", { name: "Contact Clynera Tech" });
   await page.waitForTimeout(300);
-  await form.getByRole("button", { name: "Start the conversation" }).click();
+  await form.getByRole("button", { name: "Send my message" }).click();
   const alert = form.getByRole("alert");
   await expect(alert).toContainText("Enter your name.");
   await expect(alert).toContainText("Enter a valid email address.");
@@ -53,11 +53,11 @@ test("a technology inquiry is accepted with a reference", async ({ page }) => {
   const form = page.getByRole("form", { name: "Contact Clynera Tech" });
   await form.getByLabel("Full name").fill("Form Tester");
   await form.getByLabel("Work email").fill(`form-${Date.now()}@example.com`);
-  await form.getByLabel("What do you want to build?").fill("A customer portal connected to our existing billing system.");
+  await form.getByLabel("What are you trying to build or fix?").fill("A customer portal connected to our existing billing system.");
   await page.waitForTimeout(2700);
-  await form.getByRole("button", { name: "Start the conversation" }).click();
+  await form.getByRole("button", { name: "Send my message" }).click();
   const done = page.getByRole("status");
-  await expect(done).toContainText("Thank you, Form.");
+  await expect(done).toContainText("Thanks, Form.");
   await expect(done).toContainText(/Reference CT-[A-Z0-9]{8}/);
 });
 
@@ -70,20 +70,31 @@ test("careers links open the careers form and require consent", async ({ page })
   await form.getByLabel("Location").fill("Dallas, TX");
   await form.getByLabel("Roles you are interested in").fill("Data engineer");
   await form.getByLabel("Your main skills").fill("Python, SQL, AWS");
-  await form.getByRole("button", { name: "Start the conversation" }).click();
+  await form.getByRole("button", { name: "Send my message" }).click();
   await expect(form.getByRole("alert")).toContainText("privacy notice");
+});
+
+test("careers leads to a job search with an honest empty state", async ({ page }) => {
+  await page.goto("/careers");
+  await page.getByRole("main").getByRole("link", { name: /Search jobs|open role/ }).first().click();
+  await expect(page).toHaveURL(/\/careers\/jobs$/);
+  const search = page.getByRole("search", { name: "Search jobs" });
+  await expect(search.getByLabel("Keyword")).toBeVisible();
+  await search.getByLabel("Keyword").fill("engineer");
+  await expect(page.getByRole("status")).toContainText("No open roles listed right now");
+  await expect(page.getByRole("main").getByRole("link", { name: "Join the talent network" })).toBeVisible();
 });
 
 test("articles open from the insights index", async ({ page }) => {
   await page.goto("/insights");
-  await page.getByRole("link", { name: "The talent problem is actually a system problem" }).click();
-  await expect(page).toHaveURL(/\/insights\/the-talent-problem-is-a-system-problem$/);
-  await expect(page.getByRole("heading", { level: 1, name: "The talent problem is actually a system problem" })).toBeVisible();
+  await page.getByRole("link", { name: "Hire for the problem, not the stack" }).click();
+  await expect(page).toHaveURL(/\/insights\/hire-for-the-problem-not-the-stack$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Hire for the problem, not the stack" })).toBeVisible();
 });
 
 test("every page ends with the signature finale", async ({ page }) => {
-  await page.goto("/company");
-  const finale = page.getByRole("heading", { name: "Everything connects." });
+  await page.goto("/about");
+  const finale = page.getByRole("heading", { name: "There is always a way out." });
   await finale.scrollIntoViewIfNeeded();
   await expect(finale).toBeVisible();
   await expect(page.locator("[data-finale]")).toHaveAttribute("data-finale", "done", { timeout: 10_000 });

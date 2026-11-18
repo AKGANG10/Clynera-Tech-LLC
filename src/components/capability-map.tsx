@@ -131,7 +131,7 @@ export function CapabilityMap({ images = {}, detailHref }: { images?: Partial<Re
             </li>
           ))}
         </ul>
-        {detailHref ? <ArrowLink href={detailHref} className="mt-10">All capabilities</ArrowLink> : null}
+        {detailHref ? <ArrowLink href={detailHref} className="mt-10">Every route in detail</ArrowLink> : null}
       </div>
     </div>
   );

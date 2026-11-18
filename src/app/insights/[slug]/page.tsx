@@ -62,7 +62,7 @@ export default async function InsightPage({ params }: PageProps<"/insights/[slug
             ))}
           </div>
           <div className="mt-16 border-t border-ink-200 pt-8">
-            <ArrowLink href="/insights">All insights</ArrowLink>
+            <ArrowLink href="/insights">All field notes</ArrowLink>
           </div>
         </Container>
       </article>

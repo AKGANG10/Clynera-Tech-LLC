@@ -19,6 +19,14 @@
 - Service area "available to organizations across the United States".
 - "TX" as the state for the address (the supplied address gave city and ZIP only).
 
+## Voice (2026-11-19 rewrite)
+
+All copy was rewritten at the owner's request around "Every system is a maze. We find the way through." Pages: home, capabilities, work, talent (/people), careers, search jobs, insights (three new field notes), about (formerly company), contact, legal.
+
+## Open roles
+
+`src/content/jobs.ts` is empty: no openings supplied. Add only real, current vacancies (title, type, work style, location, skills, summary, responsibilities, requirements, posted date).
+
 ## Written for the site, needs owner review
 
 - All capability descriptions (`src/content/capabilities.ts`).

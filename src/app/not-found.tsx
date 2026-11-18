@@ -15,12 +15,12 @@ export default function NotFound() {
         </svg>
         <ChapterLabel index="404" name="Not found" tone="dark" className="mt-10" />
         <h1 id="nf-title" className="t-h1 mt-6 max-w-[14ch] text-paper">
-          This path doesn&apos;t connect.
+          Dead end.
         </h1>
-        <p className="t-lead mt-6 max-w-lg text-ink-300">The page may have moved, or the link may be incomplete.</p>
+        <p className="t-lead mt-6 max-w-lg text-ink-300">Even good maps have them. The page may have moved, or the link may be incomplete.</p>
         <div className="mt-10 flex flex-wrap gap-3">
           <ButtonLink href="/" tone="dark">
-            Back to the start
+            Back to the entrance
           </ButtonLink>
           <ButtonLink href="/contact" variant="secondary" tone="dark">
             Contact us

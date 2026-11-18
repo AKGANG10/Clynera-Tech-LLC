@@ -59,9 +59,9 @@ export function BuildSequence({ headingId = "build-title" }: { headingId?: strin
     <div ref={track} className={cx("relative", reduced ? "" : "h-[460vh]")}>
       <div className={cx("flex flex-col overflow-hidden", reduced ? "py-24" : "sticky top-0 h-svh min-h-[40rem]")}>
         <div className="container-x pt-[calc(var(--header-h)+2rem)]">
-          <ChapterLabel index="04" name="Build" tone="dark" />
+          <ChapterLabel index="04" name="Blueprint" tone="dark" />
           <h2 id={headingId} className="t-h2 mt-6 max-w-[18ch] text-paper">
-            How an idea becomes a system.
+            From first question to running system.
           </h2>
         </div>
 

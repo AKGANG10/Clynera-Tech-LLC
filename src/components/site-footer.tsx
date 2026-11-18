@@ -9,21 +9,19 @@ import { Visual } from "./visual";
 export function SiteFooter() {
   return (
     <footer data-tone="dark" className="relative isolate overflow-hidden bg-ink-950 text-paper">
-      <section aria-labelledby="finale-title" data-chapter="∞ / Everything connects" data-tone="dark" className="relative">
+      <section aria-labelledby="finale-title" data-chapter="∞ / Way out" data-tone="dark" className="relative">
         <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-70">
           <Visual name="horizon" rounded={false} className="!absolute inset-0 !aspect-auto size-full" sizes="100vw" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgb(7_17_47/0.65)_55%,#07112f_100%)]" />
         </div>
         <Container className="flex flex-col items-center py-24 text-center sm:py-32">
           <Finale className="w-[min(15rem,60vw)]" />
-          <h2 id="finale-title" className="t-display mt-12">
-            Everything
-            <br />
-            connects.
+          <h2 id="finale-title" className="t-display mt-12 max-w-[12ch]">
+            There is always a way out.
           </h2>
-          <p className="t-h3 mt-6 text-signal-300">Let&apos;s build what&apos;s next.</p>
+          <p className="t-h3 mt-6 text-signal-300">Let&apos;s find yours.</p>
           <ButtonLink href="/contact" tone="dark" className="mt-10">
-            Start a conversation
+            Talk to a guide
           </ButtonLink>
         </Container>
       </section>
@@ -32,7 +30,7 @@ export function SiteFooter() {
         <Container className="grid gap-12 py-16 md:grid-cols-12">
           <div className="md:col-span-4">
             <Image src="/brand/clynera-logo-light.png" alt="Clynera Tech LLC" width={164} height={48} className="h-11 w-auto" />
-            <p className="mt-6 max-w-xs text-[0.95rem] leading-relaxed text-ink-300">IT services, IT consulting and IT staffing. Technology and the people who run it, working as one system.</p>
+            <p className="mt-6 max-w-xs text-[0.95rem] leading-relaxed text-ink-300">IT services, IT consulting and IT staffing from Dallas, Texas. Every system is a maze; we find the way through.</p>
           </div>
           <div className="md:col-span-3">
             <h2 className="t-meta text-ink-400">Contact</h2>

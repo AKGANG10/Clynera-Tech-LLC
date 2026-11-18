@@ -1,5 +1,6 @@
 /**
- * Industries, concept work, people and the company story.
+ * Industries, concept work, people and the company story, in the brand voice:
+ * every system is a maze, and we find the way through.
  * Everything here describes problems, approaches and intentions. Nothing is a
  * claim about past clients, results or headcount (see docs/CONTENT_INVENTORY.md).
  */
@@ -9,185 +10,185 @@ export const industries = [
   {
     id: "finance",
     name: "Financial services",
-    problem: "Legacy cores, manual reconciliation and rising compliance load.",
-    technology: "Event-driven integration, data platforms and audit-ready automation.",
-    possibility: "Products that ship weekly while every change stays traceable.",
+    problem: "Every change needs three approvals and a spreadsheet nobody trusts.",
+    technology: "Event-driven integration, governed data and automated controls.",
+    possibility: "Faster releases with an audit trail that writes itself.",
     hue: "#10264f",
   },
   {
     id: "healthcare",
     name: "Healthcare",
-    problem: "Records split across systems and staff buried in paperwork.",
-    technology: "Interoperable data, secure portals and document AI with human review.",
-    possibility: "More time with patients, less time with forms.",
+    problem: "Clinicians typing the same details into four screens.",
+    technology: "Interoperable records, secure portals and document capture with review.",
+    possibility: "Shorter queues and more attention on the patient in the room.",
     hue: "#0b2f3a",
   },
   {
     id: "retail",
     name: "Retail",
-    problem: "Inventory, channels and customers that never quite line up.",
-    technology: "Unified commerce data, demand signals and fast storefronts.",
-    possibility: "One view of stock and customer, in every channel.",
+    problem: "The website says in stock; the shelf says otherwise.",
+    technology: "Unified inventory data, demand signals and quick storefronts.",
+    possibility: "One honest stock count across every channel.",
     hue: "#2a2236",
   },
   {
     id: "manufacturing",
     name: "Manufacturing",
-    problem: "Plant data that stays on the plant floor.",
-    technology: "Connected operations, cloud data pipelines and predictive maintenance.",
-    possibility: "Problems seen before they stop the line.",
+    problem: "Machines report problems that no one sees until the line stops.",
+    technology: "Connected sensors, cloud pipelines and maintenance forecasting.",
+    possibility: "Repairs scheduled before the breakdown, not after.",
     hue: "#1b2533",
   },
   {
     id: "technology",
     name: "Technology",
-    problem: "Roadmaps that outgrow the team building them.",
-    technology: "Platform engineering, dedicated teams and specialist hiring.",
-    possibility: "Capacity that grows with the product, not behind it.",
+    problem: "The roadmap grows faster than the hiring plan.",
+    technology: "Platform engineering, embedded squads and specialist search.",
+    possibility: "Release dates that hold, with a team that scales alongside them.",
     hue: "#151f4f",
   },
   {
     id: "professional",
     name: "Professional services",
-    problem: "Knowledge locked in documents, inboxes and individual heads.",
-    technology: "Search and assistant systems, workflow automation and client portals.",
-    possibility: "Expertise that scales beyond the people who hold it.",
+    problem: "The best answers live in someone's inbox.",
+    technology: "Knowledge search, assistants, client portals and workflow automation.",
+    possibility: "Expertise that is findable by everyone, not just its author.",
     hue: "#251e3d",
   },
   {
     id: "startups",
     name: "Startups",
-    problem: "Too much to build and too few people to build it.",
-    technology: "Product engineering, cloud foundations and first technical hires.",
-    possibility: "A product and a team that can survive their own success.",
+    problem: "A product to ship, investors to update and two engineers.",
+    technology: "Lean product builds, cloud foundations and first key hires.",
+    possibility: "A stack and a team ready for the next funding round.",
     hue: "#0d2e2c",
   },
   {
     id: "public",
     name: "Public sector",
-    problem: "Services that must work for everyone, on any device.",
-    technology: "Accessible digital services, secure data sharing and modernization.",
-    possibility: "Public services that feel as simple as they should.",
+    problem: "Services that must work for every resident, on any device, first time.",
+    technology: "Accessible web services, secure data sharing and careful modernization.",
+    possibility: "Public services as easy as the apps people already use.",
     hue: "#1f2a2e",
   },
 ] as const;
 
-/** Conceptual examples. Labelled CONCEPT / EXPLORATION wherever shown: not client work. */
+/** Conceptual examples. Labelled "Concept, not client work" wherever shown. */
 export const concepts = [
   {
-    id: "intake",
-    title: "Claims intake that reads itself",
-    field: "Insurance and healthcare",
-    problem: "Every claim arrives as a mix of forms, scans and emails that staff re-key by hand.",
-    approach: "Document AI extracts and classifies each submission; uncertain fields go to a review queue instead of being guessed.",
-    technology: ["Document AI", "Python", "Event queues", "Review console"],
-    outcome: "Designed to shorten triage and leave an audit trail for every decision a model makes.",
+    id: "helpdesk",
+    title: "An IT help desk that answers before the ticket",
+    field: "Operations and internal IT",
+    problem: "Most tickets are password resets, access requests and the same handful of questions.",
+    approach: "An assistant trained on the internal knowledge base handles the routine requests and hands anything unusual to a person with full context attached.",
+    technology: ["Knowledge search", "Workflow automation", "Identity integration", "Ticketing APIs"],
+    outcome: "Designed to give the support team back the hours spent on repeats.",
   },
   {
-    id: "supply",
-    title: "One view of the supply chain",
-    field: "Manufacturing and retail",
-    problem: "Orders, inventory and shipments live in four systems that disagree.",
-    approach: "A cloud data platform reconciles the sources nightly, then in near real time, with data-quality checks at every step.",
-    technology: ["Cloud data warehouse", "Streaming pipelines", "dbt-style models", "Dashboards"],
-    outcome: "Designed so planners trust one number instead of arguing about four.",
+    id: "scheduling",
+    title: "Appointments without the phone tag",
+    field: "Healthcare and clinics",
+    problem: "Patients wait on hold to book, reschedule or ask a basic question.",
+    approach: "A secure, accessible portal for booking and reminders, connected to the existing scheduling system rather than replacing it.",
+    technology: ["Patient portal", "Scheduling integration", "SMS and email reminders", "Accessibility testing"],
+    outcome: "Designed to free front-desk staff for the conversations that need a person.",
   },
   {
-    id: "team",
-    title: "A hiring engine for a scaling team",
-    field: "Technology companies",
-    problem: "A product roadmap needs twelve engineers; recruiting delivers two a quarter.",
-    approach: "Role definitions written with the engineering leads, technical screening by practitioners and a blended contract-to-hire model.",
-    technology: ["Skills mapping", "Technical screening", "Contract-to-hire", "Onboarding playbooks"],
-    outcome: "Designed to add capacity in weeks while keeping the bar for permanent hires.",
+    id: "squad",
+    title: "A ready-made squad for a hard deadline",
+    field: "Software and technology companies",
+    problem: "A launch date is fixed, and the team needed to hit it does not exist yet.",
+    approach: "A dedicated squad of engineers, a QA specialist and a delivery lead, screened by practitioners and working inside the client's own process.",
+    technology: ["Squad staffing", "Technical screening", "Delivery leadership", "Knowledge handover"],
+    outcome: "Designed to add delivery capacity quickly and hand the knowledge back at the end.",
   },
   {
-    id: "migration",
-    title: "A cloud move without a weekend outage",
-    field: "Any organization on aging infrastructure",
-    problem: "A critical application runs on hardware nobody wants to touch.",
-    approach: "Infrastructure as code, a parallel environment and traffic shifted gradually behind health checks, with a tested way back.",
-    technology: ["Terraform", "Containers", "CI/CD", "Observability"],
-    outcome: "Designed to make the cut-over boring, which is the point.",
+    id: "reconcile",
+    title: "Month-end close in hours, not days",
+    field: "Finance teams",
+    problem: "Payments, invoices and bank records are matched by hand every month.",
+    approach: "Automated pipelines match records nightly, flag only the true exceptions and log every decision for the auditors.",
+    technology: ["Data pipelines", "Matching rules", "Exception queue", "Audit logging"],
+    outcome: "Designed to shrink the close and make every adjustment traceable.",
   },
 ] as const;
 
-/** The people behind the systems (roles we work through, not named staff). */
+/** The guides behind the systems (roles we work through, not named staff). */
 export const roles = [
-  { id: "engineer", name: "Engineers", line: "Write the code that has to work at 3 a.m.", visual: "engineer" },
-  { id: "architect", name: "Architects", line: "Decide what the system is, and what it isn't.", visual: "architect" },
-  { id: "consultant", name: "Consultants", line: "Turn a business problem into a plan.", visual: "consultant" },
-  { id: "recruiter", name: "Recruiters", line: "Know the difference between a keyword and a skill.", visual: "recruiter" },
-  { id: "leader", name: "Leaders", line: "Own the outcome, not just the timeline.", visual: "leader" },
-  { id: "product", name: "Product thinkers", line: "Keep asking who this is for.", visual: "product" },
+  { id: "engineer", name: "Engineers", line: "Lay the paths and keep them clear.", visual: "engineer" },
+  { id: "architect", name: "Architects", line: "Draw the map before anyone walks it.", visual: "architect" },
+  { id: "consultant", name: "Consultants", line: "Spot the dead ends early.", visual: "consultant" },
+  { id: "recruiter", name: "Recruiters", line: "Find the person who has walked this route before.", visual: "recruiter" },
+  { id: "leader", name: "Delivery leads", line: "Keep the whole party moving in one direction.", visual: "leader" },
+  { id: "product", name: "Product people", line: "Ask where the customer is trying to go.", visual: "product" },
 ] as const;
 
 /** Further roles named in the editorial composition (no images). */
-export const moreRoles = ["Designers", "Data specialists", "Operators", "Security analysts"] as const;
+export const moreRoles = ["Designers", "Data engineers", "Cloud operators", "Security analysts", "QA specialists"] as const;
 
 /**
- * The Human Network: an illustrative graph. People are anonymized archetypes,
- * not real candidates; the section is labelled as an example.
+ * Where skills meet the work: an illustrative graph. Specialists are
+ * anonymized archetypes, not real candidates; the section says so.
  */
 export const network = {
   columns: [
-    { id: "people", name: "People" },
+    { id: "people", name: "Specialists" },
     { id: "skills", name: "Skills" },
     { id: "roles", name: "Roles" },
     { id: "projects", name: "Projects" },
-    { id: "companies", name: "Companies" },
-    { id: "opportunity", name: "Opportunity" },
+    { id: "companies", name: "Employers" },
+    { id: "opportunity", name: "Engagement" },
   ],
   nodes: {
-    people: ["Person A", "Person B", "Person C", "Person D"],
-    skills: ["Python", "AWS", "React", "Data modeling", "Security", "Kubernetes"],
-    roles: ["Data engineer", "Cloud architect", "Front-end engineer", "Security analyst"],
-    projects: ["Data platform", "Cloud migration", "Customer portal", "Identity rollout"],
-    companies: ["Healthcare provider", "Fintech startup", "Retail group", "Public agency"],
+    people: ["Specialist 1", "Specialist 2", "Specialist 3", "Specialist 4"],
+    skills: ["Java", "Azure", "TypeScript", "SQL", "Terraform", "Identity"],
+    roles: ["Backend engineer", "Platform engineer", "Full-stack developer", "IAM engineer"],
+    projects: ["Payments API", "Azure landing zone", "Booking portal", "Access review"],
+    companies: ["Regional bank", "Logistics firm", "Clinic group", "University"],
     opportunity: ["Contract", "Contract-to-hire", "Direct hire"],
   },
-  /** Each chain runs person → skill → skill → role → project → company → opportunity. */
+  /** Each chain runs specialist, skill, skill, role, project, employer, engagement. */
   chains: [
-    ["Person A", "Python", "Data modeling", "Data engineer", "Data platform", "Healthcare provider", "Contract-to-hire"],
-    ["Person B", "AWS", "Kubernetes", "Cloud architect", "Cloud migration", "Fintech startup", "Contract"],
-    ["Person C", "React", "Python", "Front-end engineer", "Customer portal", "Retail group", "Direct hire"],
-    ["Person D", "Security", "AWS", "Security analyst", "Identity rollout", "Public agency", "Contract"],
+    ["Specialist 1", "Java", "SQL", "Backend engineer", "Payments API", "Regional bank", "Contract-to-hire"],
+    ["Specialist 2", "Azure", "Terraform", "Platform engineer", "Azure landing zone", "Logistics firm", "Contract"],
+    ["Specialist 3", "TypeScript", "SQL", "Full-stack developer", "Booking portal", "Clinic group", "Direct hire"],
+    ["Specialist 4", "Identity", "Azure", "IAM engineer", "Access review", "University", "Contract"],
   ],
 } as const;
 
-/** Company story, told as progress. Only facts the company supplied, plus stated beliefs. */
+/** The company story, as a route. Only supplied facts plus stated beliefs. */
 export const story = [
   {
-    stage: "Where we started",
+    stage: "The starting point",
     title: "Dallas, Texas.",
-    body: "A technology and talent company, built around one idea: the value is in the connection between systems and the people who run them.",
+    body: "Clynera Tech is a technology and talent company with one job: find the clearest way through complex technology work.",
   },
   {
-    stage: "What we learned",
-    title: "Systems fail at the seams.",
-    body: "Technology work rarely stalls on the technology alone. It stalls where a system meets a team that was never set up to own it.",
+    stage: "The pattern we saw",
+    title: "Projects get lost, not beaten.",
+    body: "Technology rarely fails outright. It gets stuck between teams, vendors and decisions that nobody owns.",
   },
   {
-    stage: "What we built",
-    title: "One practice, two halves.",
-    body: "IT services, IT consulting and IT staffing under one roof, so one partner is accountable for the system and for the team behind it.",
+    stage: "Our answer",
+    title: "Guides, not just builders.",
+    body: "IT services, IT consulting and IT staffing from one partner, so the map, the build and the people come from the same place.",
   },
   {
-    stage: "Where we are",
+    stage: "Today",
     title: "1341 W. Mockingbird Lane.",
     body: "Suite 600W, Dallas. Our services are available to organizations across the United States, and we participate in E-Verify.",
   },
   {
-    stage: "Where we're going",
-    title: "Systems that adapt.",
-    body: "AI as infrastructure, talent as a network and software that keeps learning after launch. That is the work we want to be known for.",
+    stage: "Next",
+    title: "Shorter routes.",
+    body: "Smarter tooling, sharper specialists and AI used where it removes steps. The goal stays the same: less maze, more progress.",
   },
 ] as const;
 
-/** Principles that shape delivery. */
+/** How we hold ourselves to the work. */
 export const principles = [
-  { name: "Proof over promises", body: "We show working software and real evidence, never borrowed numbers." },
-  { name: "People own systems", body: "Every system we build has a team ready to run it." },
-  { name: "Security by default", body: "Access, data and failure are designed in on day one." },
-  { name: "Plain language", body: "If a decision cannot be explained simply, it is not ready." },
+  { name: "Show, then tell", body: "Working software and real evidence come before slides and promises." },
+  { name: "Leave a map behind", body: "Every system we touch ends better documented than we found it." },
+  { name: "Secure from line one", body: "Access, data and failure modes are designed in, never patched on." },
+  { name: "Say it simply", body: "If a plan needs jargon to sound good, it is not a good plan yet." },
 ] as const;

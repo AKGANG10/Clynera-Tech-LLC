@@ -17,7 +17,7 @@ const archivo = Archivo({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Clynera Tech | IT Services, IT Consulting and IT Staffing in Dallas",
+    default: "Clynera Tech: IT Services, IT Consulting and IT Staffing, Dallas TX",
     template: "%s | Clynera Tech",
   },
   description: company.description,

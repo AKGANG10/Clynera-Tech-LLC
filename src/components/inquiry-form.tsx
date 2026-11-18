@@ -168,10 +168,10 @@ export function InquiryForm() {
       <div ref={done} tabIndex={-1} role="status" className="rounded-[var(--radius-panel)] bg-ink-950 p-8 text-paper outline-none sm:p-12">
         <p className="t-meta flex items-center gap-3 text-signal-300">
           <span aria-hidden="true" className="node" />
-          Connected
+          Message received
         </p>
-        <p className="t-h2 mt-6">Thank you, {status.name.split(" ")[0]}.</p>
-        <p className="t-lead mt-5 max-w-xl text-ink-200">We have your message and will reply by email to {status.email}.</p>
+        <p className="t-h2 mt-6">Thanks, {status.name.split(" ")[0]}. You&apos;re on the map.</p>
+        <p className="t-lead mt-5 max-w-xl text-ink-200">A guide from our team will reply by email to {status.email}.</p>
         <p className="t-meta mt-8 text-ink-400">Reference {status.reference}</p>
         <button type="button" onClick={() => setStatus({ state: "idle" })} className={cx(buttonClass("secondary", "dark"), "mt-10")}>
           Send another message
@@ -201,7 +201,7 @@ export function InquiryForm() {
       ) : null}
 
       <fieldset>
-        <legend className="t-label text-[0.78rem] text-ink-800">What would you like to talk about?</legend>
+        <legend className="t-label text-[0.78rem] text-ink-800">Where are you headed?</legend>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {contactTopics.map((t) => (
             <label
@@ -257,7 +257,7 @@ export function InquiryForm() {
               ))}
             </div>
           </fieldset>
-          <Field {...p} name="message" label="What do you want to build?" error={errors.message}>
+          <Field {...p} name="message" label="What are you trying to build or fix?" error={errors.message}>
             {(a) => <textarea {...a} rows={5} maxLength={limits.long} className={cx(a.className, "resize-y")} />}
           </Field>
           <div className="sm:w-1/2">
@@ -270,7 +270,7 @@ export function InquiryForm() {
 
       {topic === "talent" ? (
         <>
-          <Field {...p} name="message" label="Which roles or team do you need?" error={errors.message}>
+          <Field {...p} name="message" label="Which specialists do you need?" error={errors.message}>
             {(a) => <textarea {...a} rows={5} maxLength={limits.long} className={cx(a.className, "resize-y")} />}
           </Field>
           <div className="grid gap-6 sm:grid-cols-3">
@@ -360,7 +360,7 @@ export function InquiryForm() {
 
       <div className="flex flex-wrap items-center gap-6">
         <button type="submit" disabled={status.state === "sending"} aria-busy={status.state === "sending" || undefined} className={cx(buttonClass("primary"), "disabled:opacity-60")}>
-          {status.state === "sending" ? "Sending" : "Start the conversation"}
+          {status.state === "sending" ? "Sending" : "Send my message"}
           <Arrow className="transition-transform duration-[var(--dur-component)] group-hover:translate-x-1" />
         </button>
         <p className="text-sm text-ink-500">

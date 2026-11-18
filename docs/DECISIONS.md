@@ -35,3 +35,17 @@ Navigations collapse the page into the clicked point and grow the next page from
 ## ADR-009: No analytics (2026-11-19)
 
 No tracking scripts or cookies, matching the privacy notice. If analytics are added, choose a privacy-respecting tool and update the notice first.
+
+## ADR-010: New verbal identity, "Every system is a maze. We find the way through." (2026-11-19)
+
+**Context.** The owner asked for completely different taglines and content, not the launch copy (which reused the creative brief's sample lines and echoed the Syntax Flow site).
+**Decision.** The voice comes from the logo itself: a maze with an arrow breaking out. Technology is the maze, Clynera Tech the guide, specialists the people who walk it. Every headline, description, concept, industry line, story stage, principle and article was rewritten. Category words (IT services, IT consulting, IT staffing) stay in titles, metadata and the hero.
+**Consequences.** Old URLs keep working: `/company` redirects to `/about`; the three original article slugs redirect to `/insights`.
+
+## ADR-011: Careers with a real job search and no invented openings (2026-11-19)
+
+**Decision.** `/careers` explains how candidates work with us; `/careers/jobs` is a working search (keyword, job type, work style) over `src/content/jobs.ts`. The list is empty because no openings were supplied, so the page says so and offers the talent network. Each future listing is published with JobPosting structured data, which is why only genuine, current vacancies may be added.
+
+## ADR-012: Owner-supplied images, cropped per slot (2026-11-19)
+
+**Decision.** Eight of the eleven supplied images are used, cropped to slot ratios around their subject (crop plan in docs/IMAGE_BRIEF.md). Three were rejected: two show embedded slogans and service claims not supplied by the company ("Internship Programs"), one shows another brand name and invented metrics. Images with realistic people carry the "Illustration" tag.

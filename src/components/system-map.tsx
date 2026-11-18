@@ -6,12 +6,12 @@ import { useScrollProgress } from "@/lib/motion";
 import { ChapterLabel, cx } from "./ui";
 
 /**
- * STATE 03 DISCOVER. Technology does not exist in isolation: nine parts of a
- * business pull apart as the visitor scrolls, then reconnect around the core.
+ * STATE 03 DISCOVER. Most problems are tangled, not technical: nine parts of
+ * a business pull apart as the visitor scrolls, then line up around the core.
  * Words sit at their connected positions in the HTML (the no-script and
  * reduced-motion state); scroll moves them away and back with transforms.
  */
-const PARTS = ["People", "Data", "AI", "Software", "Cloud", "Design", "Strategy", "Talent", "Business"] as const;
+const PARTS = ["Teams", "Data", "AI", "Code", "Cloud", "Process", "Security", "Talent", "Customers"] as const;
 
 // Connected positions: a diamond around the core (x%, y%), desktop and phone.
 const ring = (a: number, b: number) =>
@@ -129,9 +129,9 @@ export function SystemMap({ core }: { core: ReactNode }) {
     <div ref={track} className="system-track relative h-[300vh] motion-reduce:h-auto">
       <div className="sticky top-0 flex h-svh min-h-[40rem] flex-col overflow-hidden motion-reduce:relative motion-reduce:h-auto">
         <div className="container-x relative z-10 pt-[calc(var(--header-h)+2rem)]">
-          <ChapterLabel index="02" name="System" />
+          <ChapterLabel index="02" name="Untangle" />
           <h2 ref={first} id="system-title" className="t-h2 mt-6 max-w-[14ch] text-ink-950">
-            Technology doesn&apos;t exist in isolation.
+            Most problems aren&apos;t technical. They&apos;re tangled.
           </h2>
         </div>
 
@@ -151,7 +151,7 @@ export function SystemMap({ core }: { core: ReactNode }) {
                   }}
                   className={cx(
                     "t-label absolute flex items-center gap-2 rounded-full border border-ink-200 bg-chalk px-4 py-2.5 text-[0.82rem] text-ink-900 shadow-[0_10px_30px_-18px_rgb(7_17_47/0.4)] will-change-transform max-sm:px-3 max-sm:py-2 max-sm:text-[0.7rem]",
-                    part === "Business" && "border-ink-950 bg-ink-950 text-paper",
+                    part === "Customers" && "border-ink-950 bg-ink-950 text-paper",
                   )}
                   style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }}
                 >
@@ -165,7 +165,7 @@ export function SystemMap({ core }: { core: ReactNode }) {
 
         <div className="container-x relative z-10 flex justify-end pb-[max(2.5rem,6svh)]">
           <p ref={second} className="t-h2 max-w-[15ch] text-right text-ink-950">
-            The value is in the <span className="text-signal-700">connection.</span>
+            Untangle the parts and the <span className="text-signal-700">path appears.</span>
           </p>
         </div>
       </div>

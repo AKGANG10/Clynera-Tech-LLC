@@ -50,7 +50,7 @@ export function IndustryWorld({ band, index = "08", headingId = "industries-titl
         <div className="container-x relative z-10 pt-[calc(var(--header-h)+2rem)]">
           <ChapterLabel index={index} name="Industries" tone="dark" />
           <h2 id={headingId} className="t-h2 mt-6 max-w-[20ch] text-paper">
-            Different industries. One connected world.
+            Eight industries. Eight different mazes.
           </h2>
         </div>
 
@@ -84,9 +84,9 @@ export function IndustryWorld({ band, index = "08", headingId = "industries-titl
                 <dl className="relative mt-10 grid gap-6 sm:grid-cols-3">
                   {(
                     [
-                      ["Problem", ind.problem],
-                      ["Technology", ind.technology],
-                      ["Possibility", ind.possibility],
+                      ["Where it is stuck", ind.problem],
+                      ["How we would route it", ind.technology],
+                      ["Where it leads", ind.possibility],
                     ] as const
                   ).map(([k, val], j) => (
                     <div key={k} className="border-t border-white/15 pt-4">

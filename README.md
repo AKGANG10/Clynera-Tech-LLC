@@ -13,6 +13,7 @@ npm run lint
 npm run typecheck
 npm run build
 npm run test:e2e            # Playwright against the production build (installed Edge; PW_CHANNEL=chromium in CI)
+# low memory: E2E_ONLY_MAIN=1 npx playwright test --workers=1 (skips the extra EmailJS servers; run email-delivery.spec.ts separately)
 npm run screenshots -- <dir> [routes]
 npm run brand:assets        # regenerate logo variants, icons, OG image, finale points
 npm run media:import -- "<folder>"   # import generated images into their slots
@@ -20,7 +21,7 @@ npm run media:import -- "<folder>"   # import generated images into their slots
 
 ## Layout
 
-- `src/app`: routes (`/`, `/capabilities`, `/work`, `/people`, `/insights`, `/insights/[slug]`, `/company`, `/contact`, `/privacy`, `/terms`, `/api/inquiry`).
+- `src/app`: routes (`/`, `/capabilities`, `/work`, `/people`, `/careers`, `/careers/jobs`, `/insights`, `/insights/[slug]`, `/about`, `/contact`, `/privacy`, `/terms`, `/api/inquiry`).
 - `src/components`: experience components (hero system, system map, capability map, build sequence, human network, industries world, finale) and shared chapters.
 - `src/content`: all copy and facts, separate from components.
 - `src/lib/lattice.ts`: the logo's geometry, used by every visual.

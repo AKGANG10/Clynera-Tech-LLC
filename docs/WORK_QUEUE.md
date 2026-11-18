@@ -14,6 +14,11 @@
 - All routes 200, 404 page for unknown paths, CSP, HSTS and X-Frame-Options present, canonical URLs on clyneratech.com, EIN and E-Verify ID absent.
 - Real inquiry CT-TJJDSE52 from the live form arrived at hr@clyneratech.com with all fields (subject, Dallas time, reply-to).
 
+## Rewrite release (2026-11-19)
+
+- New voice across every page, new pages `/careers`, `/careers/jobs`, `/about` (308 from `/company`), three new field notes (old slugs 308 to `/insights`), 22 owner images in place.
+- Lint, type check, build pass. Playwright: desktop 46 and mobile 32 site tests with the single-server low-memory mode (`E2E_ONLY_MAIN=1`), plus the 4 EmailJS adapter tests with all servers. The machine had about 1.5 GB free RAM, so the full four-server run in parallel was not possible locally; CI runs the full suite.
+
 ## Next (need Clynera Tech)
 
 1. Review the content listed in CONTENT_INVENTORY.md, including the three articles.

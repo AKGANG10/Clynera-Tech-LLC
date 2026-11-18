@@ -33,7 +33,16 @@ test("private identifiers are never published", async ({ request }) => {
 test("unknown pages return the designed 404", async ({ page }) => {
   const res = await page.goto("/does-not-exist");
   expect(res?.status()).toBe(404);
-  await expect(page.getByRole("heading", { level: 1, name: "This path doesn't connect." })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Dead end." })).toBeVisible();
+});
+
+test("renamed pages redirect to their new homes", async ({ request }) => {
+  const about = await request.get("/company", { maxRedirects: 0 });
+  expect(about.status()).toBe(308);
+  expect(about.headers()["location"]).toBe("/about");
+  const article = await request.get("/insights/why-ai-projects-stall-before-production", { maxRedirects: 0 });
+  expect(article.status()).toBe(308);
+  expect(article.headers()["location"]).toBe("/insights");
 });
 
 test("security headers are set", async ({ request }) => {
@@ -47,7 +56,7 @@ test("security headers are set", async ({ request }) => {
 
 test("sitemap and robots list the public pages", async ({ request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  for (const p of ["/capabilities", "/people", "/insights/the-talent-problem-is-a-system-problem"]) expect(sitemap).toContain(p);
+  for (const p of ["/capabilities", "/careers/jobs", "/about", "/insights/hire-for-the-problem-not-the-stack"]) expect(sitemap).toContain(p);
   const robots = await (await request.get("/robots.txt")).text();
   expect(robots).toContain("Disallow: /api/");
 });
@@ -63,7 +72,7 @@ test("hero starts dormant and wakes on a key press", async ({ page }) => {
   await page.goto("/");
   const hero = page.locator("[data-hero]");
   // The heading is readable by assistive technology even before the system wakes.
-  await expect(page.getByRole("heading", { level: 1, name: "We build what's next." })).toBeAttached();
+  await expect(page.getByRole("heading", { level: 1, name: "We find the way through." })).toBeAttached();
   await expect(hero).toHaveAttribute("data-hero", "dormant");
   await page.keyboard.press("Shift");
   await expect(hero).toHaveAttribute("data-hero", "awake");
@@ -79,13 +88,13 @@ test("reduced motion skips the dormant state", async ({ browser }) => {
   const page = await ctx.newPage();
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-awake", "");
-  await expect(page.getByRole("link", { name: "Meet the company" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "About Clynera", exact: true })).toBeVisible();
   await ctx.close();
 });
 
 test("skip link moves focus to the main content", async ({ page, isMobile }) => {
   test.skip(isMobile, "keyboard journey");
-  await page.goto("/company");
+  await page.goto("/about");
   await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
   await page.keyboard.press("Enter");
@@ -94,7 +103,7 @@ test("skip link moves focus to the main content", async ({ page, isMobile }) => 
 
 test("mobile menu opens, navigates and closes", async ({ page, isMobile }) => {
   test.skip(!isMobile, "phone navigation");
-  await page.goto("/company");
+  await page.goto("/about");
   await page.getByRole("button", { name: "Menu" }).click();
   const menu = page.getByRole("dialog", { name: "Menu" });
   await expect(menu).toBeVisible();

@@ -9,7 +9,7 @@ import { hasVisual } from "@/lib/visual-server";
 export const metadata: Metadata = {
   title: "Capabilities: IT Services, IT Consulting and IT Staffing",
   description:
-    "AI, software, cloud, data, cybersecurity, automation, consulting, digital experience and IT staffing from Clynera Tech in Dallas, Texas.",
+    "Nine routes through complex technology: AI, software, cloud, data, cybersecurity, automation, consulting, digital experience and IT staffing, from Clynera Tech in Dallas.",
   alternates: { canonical: "/capabilities" },
 };
 
@@ -24,9 +24,9 @@ export default function CapabilitiesPage() {
       <PageIntro
         id="capabilities-page-title"
         index="03"
-        name="Capabilities"
-        title="What we build."
-        lead="Clynera Tech provides IT services, IT consulting and IT staffing. Nine capabilities, one system: choose any of them to see how it works."
+        name="Routes"
+        title="Pick a route."
+        lead="Nine capabilities across IT services, IT consulting and IT staffing. Each one is a route we travel with clients from the first question to a system that runs."
       />
 
       <Chapter index="03" name="Map" aria-label="Capability map" className="pb-28">
@@ -35,14 +35,14 @@ export default function CapabilitiesPage() {
         </Container>
       </Chapter>
 
-      <Chapter index="03" name="Software" tone="dark" aria-labelledby="software-feature" className="py-24 sm:py-32">
+      <Chapter index="03" name="Engineering" tone="dark" aria-labelledby="software-feature" className="py-24 sm:py-32">
         <Container className="grid items-center gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <ChapterLabel index="03" name="Engineering" tone="dark" />
             <h2 id="software-feature" className="t-h2 mt-6 text-paper">
-              Precision, then speed.
+              Built to be handed over.
             </h2>
-            <p className="t-lead mt-6 text-ink-300">Typed, tested and reviewed code, delivered in small releases, with documentation the next team can own.</p>
+            <p className="t-lead mt-6 text-ink-300">Small releases, tested and reviewed, documented well enough that your own team can carry on without us.</p>
           </div>
           <div className="lg:col-span-7">
             <Visual name="software" sizes="(min-width: 1024px) 55vw, 100vw" />
@@ -50,10 +50,10 @@ export default function CapabilitiesPage() {
         </Container>
       </Chapter>
 
-      <Chapter index="03" name="All capabilities" aria-labelledby="all-capabilities" className="py-28 sm:py-36">
+      <Chapter index="03" name="In detail" aria-labelledby="all-capabilities" className="py-28 sm:py-36">
         <Container>
           <h2 id="all-capabilities" className="t-h2 max-w-[18ch] text-ink-950">
-            Every capability, in plain words.
+            The routes, in plain words.
           </h2>
           {groups.map((g) => (
             <section key={g} aria-labelledby={`group-${g.replace(/\s/g, "-")}`} className="mt-20">
@@ -90,7 +90,7 @@ export default function CapabilitiesPage() {
       <Chapter index="03" name="Engagement" aria-labelledby="engage-title" className="bg-paper-2 py-28">
         <Container>
           <h2 id="engage-title" className="t-h2 text-ink-950">
-            Ways to work together.
+            Four ways to travel with us.
           </h2>
           <ul className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-panel)] bg-ink-200 sm:grid-cols-2 lg:grid-cols-4">
             {engagementModels.map((m, i) => (

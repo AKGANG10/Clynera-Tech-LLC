@@ -2,6 +2,23 @@
 
 The site is built with 23 image slots. Each slot already shows original lattice art in the right composition, so images can arrive in any order. Prompts are the owner's "Website Image Generation System" (2026-11-19); the prompt numbers below refer to that document.
 
+## Status (2026-11-19)
+
+22 of 23 slots hold the owner's supplied images (sources `images/4.png` to `11.png` from the chat), cropped with `scratchpad/crop-supplied.mjs` and imported with `npm run media:import`:
+
+| Source | Slots |
+|---|---|
+| Glass architecture, dark left (4) | hero-system-desktop, hero-system-mobile, system-core-01, architecture-digital, industry-world |
+| Glass cloud over servers at sunrise (6) | capability-cloud, insight-03, final-cta-horizon |
+| Data wave between glass panels (7) | capability-data, insight-01, transition-everything-connects |
+| Chip with capability panels (9) | capability-ai |
+| Laptop with floating layers (11) | capability-software |
+| Three colleagues at a glass model (5) | build-process, people-engineer-01, people-leader-01 |
+| Five colleagues at a glass model (10) | talent-network, people-consultant-01, people-architect-01, people-recruiter-01 |
+| Woman studying visualizations (8) | people-product-01, insight-02 |
+
+`capability-security` still uses the drawn scene. Replacing any slot: save a new file with the slot's name in `images-inbox` and re-run the import.
+
 ## How to deliver
 
 1. Generate the image with the prompt listed.

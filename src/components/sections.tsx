@@ -11,19 +11,19 @@ import { Visual } from "./visual";
  * why do you exist, what happens next.
  */
 
-/** People: technology is built by people. Hanging editorial frames at different heights. */
+/** People: the maze is technical, the guides are human. Hanging editorial frames at different heights. */
 export function PeopleChapter({ index = "05", headingId = "people-title", link = true }: { index?: string; headingId?: string; link?: boolean }) {
   // Wire lengths (rem): a gallery wall of frames hung at different heights.
   const drops = [2, 8, 4, 11, 2.5, 6.5];
   return (
-    <Chapter index={index} name="People" aria-labelledby={headingId} className="overflow-hidden py-28 sm:py-40">
+    <Chapter index={index} name="Guides" aria-labelledby={headingId} className="overflow-hidden py-28 sm:py-40">
       <Container>
-        <ChapterLabel index={index} name="People" />
-        <h2 id={headingId} className="t-display mt-10 max-w-[12ch] text-ink-950">
-          Technology is built by <span className="text-signal-700">people.</span>
+        <ChapterLabel index={index} name="Guides" />
+        <h2 id={headingId} className="t-display mt-10 max-w-[13ch] text-ink-950">
+          The maze is technical. The guides are <span className="text-signal-700">human.</span>
         </h2>
         <p className="t-lead mt-10 max-w-xl text-ink-600">
-          After all the systems, this is the part that decides whether they work. The people we work through, and the people we place, are the product.
+          Every route we take is walked by real specialists: the ones on our delivery teams and the ones we place with yours. They are the part of the system you will remember.
         </p>
       </Container>
 
@@ -48,7 +48,7 @@ export function PeopleChapter({ index = "05", headingId = "people-title", link =
               {" "}
               <span aria-hidden="true">/</span>{" "}
               <Link href="/people" className="link-line text-signal-700">
-                Meet the network
+                Talent and staffing
               </Link>
             </>
           ) : null}
@@ -58,27 +58,27 @@ export function PeopleChapter({ index = "05", headingId = "people-title", link =
   );
 }
 
-/** Work: ideas are easy, execution isn't. Concepts are labelled as concepts. */
+/** Work: slides don't ship, software does. Concepts are labelled as concepts. */
 export function WorkChapter({ index = "06", headingId = "work-title", limit = 3, full = false }: { index?: string; headingId?: string; limit?: number; full?: boolean }) {
   return (
-    <Chapter index={index} name="Work" aria-labelledby={headingId} className="overflow-hidden bg-chalk py-28 sm:py-36">
+    <Chapter index={index} name="Proof" aria-labelledby={headingId} className="overflow-hidden bg-chalk py-28 sm:py-36">
       <Container>
-        <ChapterLabel index={index} name="Work" />
+        <ChapterLabel index={index} name="Proof" />
         <h2 id={headingId} className="sr-only">
-          Ideas are easy. Execution isn&apos;t.
+          Slides don&apos;t ship. Software does.
         </h2>
         <p aria-hidden="true" className="t-display slide-in-left mt-10 text-ink-950">
-          Ideas are easy.
+          Slides don&apos;t ship.
         </p>
         <p aria-hidden="true" className="t-display slide-in-right mt-2 text-right text-signal-700">
-          Execution isn&apos;t.
+          Software does.
         </p>
       </Container>
 
       <Container className="mt-24">
         <div className="flex flex-wrap items-end justify-between gap-6 border-b border-ink-200 pb-6">
-          <h3 className="t-h2 text-[clamp(1.8rem,3.4vw,3.2rem)] text-ink-950">What we can build</h3>
-          <p className="t-meta rounded-full border border-ink-300 px-3 py-1.5 text-ink-600">Concept / Exploration, not client work</p>
+          <h3 className="t-h2 text-[clamp(1.8rem,3.4vw,3.2rem)] text-ink-950">Routes we are ready to run</h3>
+          <p className="t-meta rounded-full border border-ink-300 px-3 py-1.5 text-ink-600">Concept, not client work</p>
         </div>
         <ol className="divide-y divide-ink-200">
           {concepts.slice(0, limit).map((c, i) => (
@@ -100,9 +100,9 @@ export function WorkChapter({ index = "06", headingId = "work-title", limit = 3,
               <dl className="grid gap-6 sm:grid-cols-3 lg:col-span-8">
                 {(
                   [
-                    ["Problem", c.problem],
-                    ["Approach", c.approach],
-                    ["Intended outcome", c.outcome],
+                    ["Where it is stuck", c.problem],
+                    ["The route", c.approach],
+                    ["Where it should lead", c.outcome],
                   ] as const
                 ).map(([k, v], j) => (
                   <div key={k} className="relative border-t-2 border-ink-900 pt-4">
@@ -115,26 +115,26 @@ export function WorkChapter({ index = "06", headingId = "work-title", limit = 3,
             </li>
           ))}
         </ol>
-        {!full ? <ArrowLink href="/work" className="mt-6">How we work</ArrowLink> : null}
+        {!full ? <ArrowLink href="/work" className="mt-6">See how we work</ArrowLink> : null}
       </Container>
     </Chapter>
   );
 }
 
-/** Insights: thinking out loud, laid out like a magazine. */
+/** Insights: field notes, laid out like a magazine. */
 export function InsightsChapter({ index = "08", headingId = "insights-title" }: { index?: string; headingId?: string }) {
   const [lead, ...rest] = insights;
   return (
-    <Chapter index={index} name="Insights" aria-labelledby={headingId} className="py-28 sm:py-36">
+    <Chapter index={index} name="Field notes" aria-labelledby={headingId} className="py-28 sm:py-36">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <ChapterLabel index={index} name="Insights" />
-            <h2 id={headingId} className="t-h2 mt-6 text-ink-950">
-              Thinking out loud.
+            <ChapterLabel index={index} name="Field notes" />
+            <h2 id={headingId} className="t-h2 mt-6 max-w-[16ch] text-ink-950">
+              Notes from inside the maze.
             </h2>
           </div>
-          <ArrowLink href="/insights">All insights</ArrowLink>
+          <ArrowLink href="/insights">All field notes</ArrowLink>
         </div>
         <div className="mt-16 grid gap-10 lg:grid-cols-12">
           <article className="group relative lg:col-span-7">
@@ -194,13 +194,14 @@ export function StoryTimeline({ tone = "light" }: { tone?: "light" | "dark" }) {
 /** The contact experience: everything goes quiet, one question. */
 export function ContactChapter({ index = "10" }: { index?: string }) {
   return (
-    <Chapter index={index} name="Contact" aria-labelledby="ask-title" className="py-36 sm:py-52">
+    <Chapter index={index} name="Next step" aria-labelledby="ask-title" className="py-36 sm:py-52">
       <Container className="text-center">
-        <h2 id="ask-title" className="t-display mx-auto max-w-[11ch] text-ink-950">
-          So, what are we building?
+        <h2 id="ask-title" className="t-display mx-auto max-w-[12ch] text-ink-950">
+          Tell us where you&apos;re stuck.
         </h2>
-        <ButtonLink href="/contact" className="mt-14">
-          Start a conversation
+        <p className="t-lead mx-auto mt-8 max-w-xl text-ink-600">One message is enough to start. We reply by email with a first view of the route.</p>
+        <ButtonLink href="/contact" className="mt-12">
+          Talk to a guide
         </ButtonLink>
         <ul className="mx-auto mt-16 flex max-w-3xl flex-wrap justify-center gap-x-10 gap-y-4">
           {contactTopics.map((t) => (
